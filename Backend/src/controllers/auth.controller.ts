@@ -14,6 +14,13 @@ export const register = async (req: Request, res: Response) => {
         message: error.message,
      });
     }
+        // Handle password validation error
+        if(error.message === "Password is required") {
+            return res.status(400).json({
+                message: error.message,
+            });
+        }
+        
         // Handle invalid email error
         if(error.message === "Invalid email") {
             return res.status(400).json({

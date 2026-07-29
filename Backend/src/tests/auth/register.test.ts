@@ -70,5 +70,19 @@ describe('POST /api/auth/register', () => {
         expect(response.status).toBe(400);
         expect(response.body.message).toBe("Name is required");
     });
-    
+    it("should reject empty password", async () => {
+        const user = {
+        name: "Sid",
+        email: "sid@test.com",
+        password: "",
+    };
+
+        const response = await request(app)
+        .post("/api/auth/register")
+        .send(user);
+
+        expect(response.status).toBe(400);
+        expect(response.body.message).toBe("Password is required");
+    });
+
 });
