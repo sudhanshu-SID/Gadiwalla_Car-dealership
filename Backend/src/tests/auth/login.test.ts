@@ -35,5 +35,22 @@ describe("POST /api/auth/login", () => {
         });
 
     });
+    // test case 2
+    it("should reject login with unregistered email", async () => {
+
+        const response = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email: "unknown@test.com",
+                password: "123456",
+            });
+
+    expect(response.status).toBe(401);
+
+    expect(response.body).toEqual({
+        message: "Invalid credentials",
+    });
+
+});
 
 });
