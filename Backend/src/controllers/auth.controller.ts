@@ -8,6 +8,12 @@ export const register = async (req: Request, res: Response) => {
         return res.status(201).json(user);
 
     } catch (error: any) {
+        // Handle name validation error
+        if (error.message === "Name is required") {
+        return res.status(400).json({
+        message: error.message,
+     });
+    }
         // Handle invalid email error
         if(error.message === "Invalid email") {
             return res.status(400).json({

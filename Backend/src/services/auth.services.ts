@@ -7,6 +7,12 @@ type RegisterUserData = {
 };
 
 const registerUser = async (userData: RegisterUserData) => {
+    
+    // validate name
+    if (!userData.name.trim()) {
+    throw new Error("Name is required");
+   }
+
     //email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regular expression to validate email format
     if(!emailRegex.test(userData.email)) {

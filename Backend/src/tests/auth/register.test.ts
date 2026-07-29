@@ -43,17 +43,32 @@ describe('POST /api/auth/register', () => {
     });
 
     it("should reject invalid email", async () => {
-    const user = {
+        const user = {
         name: "Sid",
         email: "invalid-email",
         password: "123456",
     };
 
-    const response = await request(app)
+         const response = await request(app)
         .post("/api/auth/register")
         .send(user);
 
-    expect(response.status).toBe(400);
-    expect(response.body.message).toBe("Invalid email");
-});
+         expect(response.status).toBe(400);
+        expect(response.body.message).toBe("Invalid email");
+    });
+    it("should reject empty name", async () => {
+        const user = {
+        name: "",
+        email: "sid@test.com",
+        password: "123456",
+    };
+
+        const response = await request(app)
+        .post("/api/auth/register")
+        .send(user);
+
+        expect(response.status).toBe(400);
+        expect(response.body.message).toBe("Name is required");
+    });
+    
 });
