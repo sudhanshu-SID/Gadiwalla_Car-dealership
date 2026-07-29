@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import registerUser from "../services/auth.services";
+import {registerUser, loginUser} from "../services/auth.services";
 
+//user register controller
 export const register = async (req: Request, res: Response) => {
     try {
         const user = await registerUser(req.body);
@@ -39,5 +40,25 @@ export const register = async (req: Request, res: Response) => {
         });
     }
 };
+    //user login controller
+   export const login = async (req: any, res: any) => {
+      try {
 
-export default register;
+        const response = await loginUser(req.body);
+
+        return res.status(200).json(response);
+
+      } catch (error: any) {
+
+        if (error.message === "Invalid credentials") {
+            return res.status(401).json({
+                message: error.message,
+            });
+        }
+
+        return res.status(500).json({
+            message: "Internal server error",
+        });
+    }
+};
+

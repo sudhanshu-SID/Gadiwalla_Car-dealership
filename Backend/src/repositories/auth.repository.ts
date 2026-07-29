@@ -5,7 +5,7 @@ type CreateUserData = {
     email: string;
     password: string;
 };
-
+// Find user by email
 export const findUserByEmail = async (email: string) => {
     return prisma.user.findUnique({
         where: {
@@ -13,8 +13,8 @@ export const findUserByEmail = async (email: string) => {
         },
     });
 };
-
-const createUser = async (userData: CreateUserData) => {
+// Create user
+ export const createUser = async (userData: CreateUserData) => {
     return prisma.user.create({
         data: userData,
         select: {
@@ -25,4 +25,3 @@ const createUser = async (userData: CreateUserData) => {
     });
 };
 
-export default createUser;
