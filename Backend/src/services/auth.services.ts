@@ -30,7 +30,8 @@ export const registerUser = async (userData: RegisterUserData) => {
         throw new Error("Email already exists");
     }
 
-    // return createUser(userData); //instead of directly returning the password we return hashedPassword
+    // return createUser(userData); 
+    //instead of directly returning the password we return hashedPassword
     const hashedPassword = await bcrypt.hash(userData.password, 10);
 
     return createUser({
@@ -42,7 +43,10 @@ export const registerUser = async (userData: RegisterUserData) => {
 
 export const loginUser = async (loginData: any) => {
 
-
+    if(!loginData.email.trim()){
+        throw new Error("Invalid email");
+    }
+    
 
     const existingUser = await findUserByEmail(loginData.email);
 

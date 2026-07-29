@@ -50,6 +50,11 @@ export const register = async (req: Request, res: Response) => {
 
       } catch (error: any) {
 
+        if(error.message==="Invalid email") {
+            return res.status(400).json({
+                message: error.message,
+            });
+        }
         if (error.message === "Invalid credentials") {
             return res.status(401).json({
                 message: error.message,

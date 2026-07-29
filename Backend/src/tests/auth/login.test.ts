@@ -52,7 +52,7 @@ describe("POST /api/auth/login", () => {
     });
 
 });
-
+    // test case 3
     it("should reject login with wrong password", async () =>{
             const user = {
                 name: "Sid",
@@ -75,6 +75,29 @@ describe("POST /api/auth/login", () => {
 
             expect(response.body).toEqual({
                 message: "Invalid credentials",
+            });
+
+    });
+
+    // test case 4
+    it("should reject login with empty email", async () => {
+            const user = {
+                name: "Sid",
+                email: "",
+                password: "123456",
+            };
+
+            const response = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email: user.email,
+                password: user.password,
+            });
+
+            expect(response.status).toBe(400);
+
+            expect(response.body).toEqual({
+                message: "Invalid email",
             });
 
     });
