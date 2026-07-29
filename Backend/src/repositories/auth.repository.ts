@@ -6,8 +6,16 @@ type CreateUserData = {
     password: string;
 };
 
+export const findUserByEmail = async (email: string) => {
+    return prisma.user.findUnique({
+        where: {
+            email,
+        },
+    });
+};
+
 const createUser = async (userData: CreateUserData) => {
-    return await prisma.user.create({
+    return prisma.user.create({
         data: userData,
         select: {
             id: true,
