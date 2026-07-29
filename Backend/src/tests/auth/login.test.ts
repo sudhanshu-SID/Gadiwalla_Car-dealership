@@ -38,19 +38,45 @@ describe("POST /api/auth/login", () => {
     // test case 2
     it("should reject login with unregistered email", async () => {
 
-        const response = await request(app)
+             const response = await request(app)
             .post("/api/auth/login")
             .send({
                 email: "unknown@test.com",
                 password: "123456",
             });
+  
+           expect(response.status).toBe(401);
 
-    expect(response.status).toBe(401);
-
-    expect(response.body).toEqual({
-        message: "Invalid credentials",
+           expect(response.body).toEqual({
+            message: "Invalid credentials",
     });
 
 });
+
+    it("should reject login with wrong password", async () =>{
+            const user = {
+                name: "Sid",
+                email: "sid@test.com",
+                password: "123456",
+            };
+
+            await request(app)
+            .post("/api/auth/register")
+            .send(user);
+
+            const response = await request(app)
+            .post("/api/auth/login")
+            .send({
+                email: user.email,
+                password: "wrongpassword",
+            });
+
+            expect(response.status).toBe(401);
+
+            expect(response.body).toEqual({
+                message: "Invalid credentials",
+            });
+
+    });
 
 });
