@@ -1,5 +1,5 @@
 import createUser, { findUserByEmail } from "../repositories/auth.repository";
-
+import bcrypt from  "bcrypt";
 type RegisterUserData = {
     name: string;
     email: string;
@@ -12,7 +12,7 @@ const registerUser = async (userData: RegisterUserData) => {
     if(!userData.name.trim()) {
         throw new Error("Name is required");
    }
-   
+
    // Validate password
     if(!userData.password.trim()){
         throw new Error("Password is required");
@@ -30,7 +30,14 @@ const registerUser = async (userData: RegisterUserData) => {
         throw new Error("Email already exists");
     }
 
-    return createUser(userData);
+    // return createUser(userData); //instead of directly returning the password we return hashedPassword
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+
+    return createUser ({
+        ...userData,
+        password: hashedPassword,
+    });
+
 };
 
 export default registerUser;

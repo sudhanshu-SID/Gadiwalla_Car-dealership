@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import {describe, it, expect, beforeEach} from "@jest/globals";
 import request from "supertest";
 import app from "../../app";
@@ -84,5 +85,31 @@ describe('POST /api/auth/register', () => {
         expect(response.status).toBe(400);
         expect(response.body.message).toBe("Password is required");
     });
+    it("should hash the password before saving", async () => {
+        const user = {
+        name: "Sid",
+        email: "sid@test.com",
+        password: "123456",
+    };
 
+        await request(app)
+        .post("/api/auth/register")
+        .send(user);
+
+        const savedUser = await prisma.user.findUnique({
+        where: {
+            email: user.email,
+        },
+      });
+
+        expect(savedUser).not.toBeNull();
+        expect(savedUser!.password).not.toBe(user.password);
+
+        const isPasswordHashed = await bcrypt.compare(
+         user.password,
+         savedUser!.password
+    );
+
+        expect(isPasswordHashed).toBe(true);
+});
 });
