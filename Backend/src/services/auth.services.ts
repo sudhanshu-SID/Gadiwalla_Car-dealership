@@ -46,7 +46,9 @@ export const loginUser = async (loginData: any) => {
     if(!loginData.email.trim()){
         throw new Error("Invalid email");
     }
-    
+    if(!loginData.password.trim()){
+        throw new Error("Invalid password");
+    }
 
     const existingUser = await findUserByEmail(loginData.email);
 
