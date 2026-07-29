@@ -7,7 +7,12 @@ type RegisterUserData = {
 };
 
 const registerUser = async (userData: RegisterUserData) => {
-
+    //email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regular expression to validate email format
+    if(!emailRegex.test(userData.email)) {
+        throw new Error("Invalid email");
+    }
+    // Check if the email already exists in the database
     const existingUser = await findUserByEmail(userData.email);
 
     if (existingUser) {
