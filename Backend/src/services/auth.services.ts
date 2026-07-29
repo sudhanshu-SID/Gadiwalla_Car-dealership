@@ -1,10 +1,14 @@
 import { createUser, findUserByEmail } from "../repositories/auth.repository";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
 type RegisterUserData = {
     name: string;
     email: string;
     password: string;
 };
+
+
 
 export const registerUser = async (userData: RegisterUserData) => {
 
@@ -64,9 +68,19 @@ export const loginUser = async (loginData: any) => {
     if (!isPasswordCorrect) {
         throw new Error("Invalid credentials");
     }
+    const token = jwt.sign(
+    {
+        id: existingUser.id,
+        email: existingUser.email,
+        role: existingUser.role,
+    },
+    process.env.JWT_SECRET as string,
+    {expiresIn:"1h"}
+    );
 
     return {
         message: "Login successful",
+        token,
     };
 };
 

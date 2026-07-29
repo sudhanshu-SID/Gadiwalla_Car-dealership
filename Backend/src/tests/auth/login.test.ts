@@ -9,7 +9,7 @@ describe("POST /api/auth/login", () => {
         await prisma.user.deleteMany();
     });
 
-    it("should login with valid credentials", async () => {
+     it("should login successfully and return a JWT token", async () => {
 
         const user = {
             name: "Sid",
@@ -30,11 +30,12 @@ describe("POST /api/auth/login", () => {
 
         expect(response.status).toBe(200);
 
-        expect(response.body).toEqual({
-            message: "Login successful",
-        });
+        expect(response.body.message).toBe("Login successful");
+        expect(response.body.token).toBeDefined();
+        expect(typeof response.body.token).toBe("string");
 
     });
+
     // test case 2
     it("should reject login with unregistered email", async () => {
 
@@ -124,4 +125,6 @@ describe("POST /api/auth/login", () => {
             });
     });
 
+
+   
 });
