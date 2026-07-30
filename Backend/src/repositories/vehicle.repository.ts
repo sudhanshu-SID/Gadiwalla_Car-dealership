@@ -28,3 +28,24 @@ export const getVehicleById = async (id: number) => {
         },
     });
 };
+
+export const updateVehicle = async (
+    id: number,
+    vehicleData: {
+        make: string;
+        model: string;
+        year: number;
+        category: string;
+        price: number;
+        quantity: number;
+    }
+    ) => {
+
+    return prisma.vehicle.update({
+        where: {
+            id,
+        },
+        data: vehicleData,
+    });
+
+};
