@@ -4,6 +4,13 @@ A full-stack, enterprise-grade Car Dealership Inventory Management platform buil
 
 ---
 
+## 🌐 Live Demo
+
+- **Frontend (Vercel)**: [https://gadiwalla-car-dealership.vercel.app](https://gadiwalla-car-dealership.vercel.app)
+- **Backend API (Render)**: Deployed and live!
+
+---
+
 ## 🚗 Project Overview
 
 **Gadiwalla** is a modern luxury automotive dealership platform allowing users to browse vehicle inventory, filter by brand, category, price, and year, register/login with JWT authentication, and execute real-time vehicle purchases. Admin users possess full inventory control to add, update, restock, and delete vehicles.

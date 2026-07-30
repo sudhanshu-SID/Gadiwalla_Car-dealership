@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, ShoppingBag, Loader2, X, Calendar, Gauge, Share2, Edit2, Trash2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import type { Vehicle } from './VehicleCard';
 
 interface VehicleDrawerProps {
@@ -27,6 +28,8 @@ export default function VehicleDetailsDrawer({
   onEdit,
   onDelete,
 }: VehicleDrawerProps) {
+  const navigate = useNavigate();
+
   if (!vehicle) return null;
 
   return (
@@ -216,11 +219,16 @@ export default function VehicleDetailsDrawer({
             <div className="p-6 border-t border-border bg-surface flex items-center gap-4">
               <button
                 onClick={() => {
+                  if (!isAuthenticated) {
+                    onClose();
+                    navigate('/login');
+                    return;
+                  }
                   if (onPurchase && vehicle.status !== 'SOLD' && !isPurchasing) {
                     onPurchase(vehicle);
                   }
                 }}
-                disabled={vehicle.status === 'SOLD' || isPurchasing || !isAuthenticated}
+                disabled={vehicle.status === 'SOLD' || isPurchasing}
                 className={`flex-1 py-4 rounded-button font-semibold tracking-wider uppercase transition-all shadow-fab hover:shadow-fab-hover flex items-center justify-center gap-2 text-label ${
                   vehicle.status === 'SOLD'
                     ? 'bg-secondary/40 text-text-muted cursor-not-allowed border border-border'
