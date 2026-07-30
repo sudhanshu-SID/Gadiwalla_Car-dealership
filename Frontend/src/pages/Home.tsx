@@ -7,6 +7,7 @@ import AdminFAB from '../components/home/AdminFAB';
 import AddVehicleModal from '../components/home/AddVehicleModal';
 import DeleteDialog from '../components/home/DeleteDialog';
 import type { Vehicle } from '../components/home/VehicleCard';
+import { useAuth } from '../context/AuthContext';
 import { toast } from 'sonner';
 
 const INITIAL_VEHICLES: Vehicle[] = [
@@ -133,6 +134,9 @@ const INITIAL_VEHICLES: Vehicle[] = [
 ];
 
 export default function Home() {
+  const { user } = useAuth();
+  const isAdmin = user?.role === 'ADMIN';
+
   const [vehicles, setVehicles] = useState<Vehicle[]>(INITIAL_VEHICLES);
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -232,13 +236,13 @@ export default function Home() {
         vehicle={selectedVehicle}
         isOpen={isDrawerOpen}
         onClose={handleCloseDrawer}
-        isAdmin={true}
+        isAdmin={isAdmin}
         onEdit={handleOpenEditModal}
         onDelete={handleOpenDeleteDialog}
       />
 
-      {/* 5. Floating Admin Action Button */}
-      <AdminFAB onClick={handleOpenAddModal} />
+      {/* 5. Floating Admin Action Button (Visible for ADMIN users) */}
+      {isAdmin && <AdminFAB onClick={handleOpenAddModal} />}
 
       {/* 6. Add / Edit Vehicle Modal */}
       <AddVehicleModal

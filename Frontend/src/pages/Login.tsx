@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Eye, EyeOff, Loader2, ArrowRight, ArrowLeft } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { toast } from 'sonner';
 
 // ─── Validation Schemas ───────────────────────────────────────────
 
@@ -34,6 +37,9 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const { login, register } = useAuth();
+  const navigate = useNavigate();
+
   // Login form
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -48,17 +54,40 @@ export default function Login() {
 
   const handleLogin = async (data: LoginFormData) => {
     setIsLoading(true);
-    // Simulate API call — replace later with real backend
-    await new Promise((r) => setTimeout(r, 1500));
-    console.log('Login:', data);
-    setIsLoading(false);
+    try {
+      await login({ email: data.email, password: data.password });
+      toast.success('Welcome back! Signed in successfully.');
+      navigate('/');
+    } catch (err: unknown) {
+      let msg = 'Login failed. Please check your credentials.';
+      if (axios.isAxiosError(err) && err.response?.data?.message) {
+        msg = err.response.data.message;
+      } else if (err instanceof Error) {
+        msg = err.message;
+      }
+      toast.error(msg);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleRegister = async (data: RegisterFormData) => {
     setIsLoading(true);
-    await new Promise((r) => setTimeout(r, 1500));
-    console.log('Register:', data);
-    setIsLoading(false);
+    try {
+      await register({ name: data.name, email: data.email, password: data.password });
+      toast.success('Account created successfully!');
+      navigate('/');
+    } catch (err: unknown) {
+      let msg = 'Registration failed. Please try again.';
+      if (axios.isAxiosError(err) && err.response?.data?.message) {
+        msg = err.response.data.message;
+      } else if (err instanceof Error) {
+        msg = err.message;
+      }
+      toast.error(msg);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const switchTab = (tab: 'signin' | 'register') => {
