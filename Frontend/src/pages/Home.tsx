@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Hero from '../components/home/Hero';
 import StatsSection from '../components/home/StatsSection';
 import VehicleGrid from '../components/home/VehicleGrid';
@@ -10,11 +10,12 @@ import type { Vehicle } from '../components/home/VehicleCard';
 import axios from 'axios';
 import { vehicleService, type CreateVehiclePayload } from '../services/vehicle.service';
 import { useAuth } from '../context/AuthContext';
+import { isAdmin } from '../utils/permissions';
 import { toast } from 'sonner';
 
 export default function Home() {
   const { user } = useAuth();
-  const isAdmin = user?.role === 'ADMIN';
+  const isAdminUser = isAdmin(user);
 
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -189,13 +190,13 @@ export default function Home() {
         vehicle={selectedVehicle}
         isOpen={isDrawerOpen}
         onClose={handleCloseDrawer}
-        isAdmin={isAdmin}
+        isAdmin={isAdminUser}
         onEdit={handleOpenEditModal}
         onDelete={handleOpenDeleteDialog}
       />
 
       {/* 5. Floating Admin Action Button (Visible for ADMIN users) */}
-      {isAdmin && <AdminFAB onClick={handleOpenAddModal} />}
+      {isAdminUser && <AdminFAB onClick={handleOpenAddModal} />}
 
       {/* 6. Add / Edit Vehicle Modal */}
       <AddVehicleModal

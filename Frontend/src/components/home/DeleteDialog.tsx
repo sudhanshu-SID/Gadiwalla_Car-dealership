@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertTriangle, Loader2 } from 'lucide-react';
 import type { Vehicle } from './VehicleCard';

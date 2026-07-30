@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Calendar, Gauge, Share2, Edit2, Trash2 } from 'lucide-react';
 import type { Vehicle } from './VehicleCard';

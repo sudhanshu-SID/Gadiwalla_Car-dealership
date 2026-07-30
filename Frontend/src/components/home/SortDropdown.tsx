@@ -1,4 +1,3 @@
-import React from 'react';
 import { ArrowUpDown } from 'lucide-react';
 
 export type SortOption = 'FEATURED' | 'PRICE_LOW_HIGH' | 'PRICE_HIGH_LOW' | 'YEAR_NEWEST' | 'NAME_AZ';

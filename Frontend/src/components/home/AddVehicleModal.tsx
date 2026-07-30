@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useForm, type Resolver } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -20,7 +20,7 @@ const vehicleSchema = z.object({
   description: z.string().optional(),
 });
 
-type VehicleFormData = z.infer<typeof vehicleSchema>;
+export type VehicleFormData = z.infer<typeof vehicleSchema>;
 
 interface AddVehicleModalProps {
   isOpen: boolean;
@@ -45,7 +45,7 @@ export default function AddVehicleModal({
     reset,
     formState: { errors },
   } = useForm<VehicleFormData>({
-    resolver: zodResolver(vehicleSchema),
+    resolver: zodResolver(vehicleSchema) as unknown as Resolver<VehicleFormData>,
     defaultValues: {
       brand: '',
       model: '',

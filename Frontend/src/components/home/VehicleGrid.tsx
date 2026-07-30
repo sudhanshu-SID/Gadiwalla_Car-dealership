@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import VehicleCard from './VehicleCard';
 import type { Vehicle } from './VehicleCard';
 import SearchBar from './SearchBar';

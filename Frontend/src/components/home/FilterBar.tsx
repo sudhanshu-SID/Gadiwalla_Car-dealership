@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface FilterBarProps {
   category: string;
   onCategoryChange: (category: string) => void;

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { User, LogOut, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
+import { isAdmin } from '../../utils/permissions';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -77,7 +78,7 @@ export default function Navbar() {
                     {user.name}
                   </span>
                   <span className="text-[10px] text-text-muted font-mono uppercase tracking-wider flex items-center gap-1">
-                    {user.role === 'ADMIN' && <Shield size={10} className="text-primary" />}
+                    {isAdmin(user) && <Shield size={10} className="text-primary" />}
                     {user.role}
                   </span>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Mail, Lock, EyeOff, Zap, Globe, Share2 } from 'lucide-react';
 import Input from '../common/Input';
 import AuthTabs from './AuthSwitcher';
@@ -49,7 +49,7 @@ export default function LoginForm() {
           style={{ animationDelay: '400ms' }}
         >
           <Zap className="w-5 h-5 fill-current" />
-          INITIALIZE ENGINE
+          SIGN IN
         </button>
 
         <div className="mt-8 flex flex-col gap-6 animate-fade-up animate-fill-forwards opacity-0 translate-y-4" style={{ animationDelay: '500ms' }}>
