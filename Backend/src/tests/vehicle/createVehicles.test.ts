@@ -1,28 +1,37 @@
 import request from "supertest";
 import app from "../../app";
-import {describe, it, expect, beforeEach} from "@jest/globals"
+import {describe, it, expect, beforeEach} from "@jest/globals";
+import prisma from "../../config/prisma";
+
 
 describe("Create Vehicle", () => {
 
+    beforeEach(async () => {
+        await prisma.vehicle.deleteMany();
+        await prisma.user.deleteMany();
+    });
+
     it("should create a vehicle successfully", async () => {
 
-        // Register
-        const user = {
-            name: "Sid",
-            email: "sid@test.com",
-            password: "123456",
+        const admin = {
+            name: "Admin",
+            email: "admin@test.com",
+            password: "admin123",
+            role: "ADMIN",
         };
 
-        await request(app)
-            .post("/api/auth/register")
-            .send(user);
+        await prisma.user.create({
+            data: {
+                ...admin,
+                password: await require("bcrypt").hash(admin.password, 10),
+            },
+        });
 
-        // Login
         const loginResponse = await request(app)
             .post("/api/auth/login")
             .send({
-                email: user.email,
-                password: user.password,
+                email: admin.email,
+                password: admin.password,
             });
 
         const token = loginResponse.body.token;

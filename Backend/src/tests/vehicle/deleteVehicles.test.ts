@@ -12,21 +12,25 @@ describe("Delete Vehicle", () => {
 
     it("should delete a vehicle successfully", async () => {
 
-        const user = {
-            name: "Sid",
-            email: "sid@test.com",
-            password: "123456",
+        const admin = {
+            name: "Admin",
+            email: "admin@test.com",
+            password: "admin123",
+            role: "ADMIN",
         };
 
-        await request(app)
-            .post("/api/auth/register")
-            .send(user);
+        await prisma.user.create({
+            data: {
+                ...admin,
+                password: await require("bcrypt").hash(admin.password, 10),
+            },
+        });
 
         const loginResponse = await request(app)
             .post("/api/auth/login")
             .send({
-                email: user.email,
-                password: user.password,
+                email: admin.email,
+                password: admin.password,
             });
 
         const token = loginResponse.body.token;
