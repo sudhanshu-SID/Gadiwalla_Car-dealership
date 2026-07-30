@@ -7,7 +7,7 @@ interface DeleteDialogProps {
   isOpen: boolean;
   vehicle: Vehicle | null;
   onClose: () => void;
-  onConfirm: (vehicleId: string) => void;
+  onConfirm: (vehicleId: string | number) => void;
   isLoading?: boolean;
 }
 
