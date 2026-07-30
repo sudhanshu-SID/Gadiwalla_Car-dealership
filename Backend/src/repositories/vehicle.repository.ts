@@ -20,3 +20,11 @@ export const getAllVehicles = async () => {
         },
     });
 };
+
+export const getVehicleById = async (id: number) => {
+    return prisma.vehicle.findUnique({
+        where: {
+            id,
+        },
+    });
+};

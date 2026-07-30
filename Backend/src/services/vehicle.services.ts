@@ -1,6 +1,6 @@
 import { createVehicle as createVehicleRepository } from "../repositories/vehicle.repository";
 import { getAllVehicles as getAllVehiclesRepository } from "../repositories/vehicle.repository";
-
+import { getVehicleById as getVehicleByIdRepository } from "../repositories/vehicle.repository";
 export interface CreateVehicleData {
     make: string;
     model: string;
@@ -20,4 +20,8 @@ export const createVehicle = async (
 
 export const getAllVehicles = async () => {
     return await getAllVehiclesRepository();
+};
+
+export const getVehicleById = async (id: number) => {
+    return await getVehicleByIdRepository(id);
 };
