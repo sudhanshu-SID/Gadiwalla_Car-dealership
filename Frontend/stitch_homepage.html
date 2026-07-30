@@ -1,0 +1,426 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}header{transition:background-color 0.3s ease,backdrop-filter 0.3s ease;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary-fixed":"#1b1c1c","on-surface":"#1a1c1c","tertiary":"#5d5f5f","surface-container-high":"#e8e8e8","surface-container-low":"#f4f3f3","surface-tint":"#994700","on-error-container":"#93000a","surface-bright":"#f9f9f9","primary-fixed":"#ffdbc8","outline-variant":"#e0c0af","on-tertiary":"#ffffff","primary-fixed-dim":"#ffb68b","surface-container-highest":"#e2e2e2","inverse-primary":"#ffb68b","on-tertiary-fixed":"#1a1c1c","secondary-fixed-dim":"#c8c6c6","on-background":"#1a1c1c","on-surface-variant":"#584235","tertiary-fixed":"#e2e2e2","primary":"#994700","on-error":"#ffffff","inverse-surface":"#2f3131","tertiary-fixed-dim":"#c6c6c7","inverse-on-surface":"#f1f1f1","surface-container-lowest":"#ffffff","secondary-fixed":"#e4e2e1","on-secondary":"#ffffff","on-tertiary-fixed-variant":"#454747","on-secondary-container":"#656464","on-primary":"#ffffff","tertiary-container":"#9fa0a0","surface":"#f9f9f9","surface-dim":"#dadada","secondary":"#5f5e5e","on-primary-fixed":"#321200","surface-container":"#eeeeee","outline":"#8c7263","on-primary-fixed-variant":"#753400","primary-container":"#ff7a00","error-container":"#ffdad6","on-primary-container":"#5c2800","secondary-container":"#e4e2e1","on-tertiary-container":"#353737","surface-variant":"#e2e2e2","error":"#ba1a1a","on-secondary-fixed-variant":"#474747","background":"#f9f9f9"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"sm":"12px","margin-mobile":"20px","xl":"80px","xs":"4px","gutter":"24px","lg":"48px","md":"24px","base":"8px","margin-desktop":"64px"},"fontFamily":{"headline-md":["Inter"],"body-md":["Inter"],"caption":["Inter"],"headline-lg":["Inter"],"label-md":["Inter"],"display-lg":["Inter"],"display-lg-mobile":["Inter"],"body-lg":["Inter"]},"fontSize":{"headline-md":["24px",{"lineHeight":"1.3","fontWeight":"500"}],"body-md":["16px",{"lineHeight":"1.6","fontWeight":"400"}],"caption":["12px",{"lineHeight":"1.4","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"1.2","letterSpacing":"-0.01em","fontWeight":"500"}],"label-md":["14px",{"lineHeight":"1","letterSpacing":"0.05em","fontWeight":"600"}],"display-lg":["64px",{"lineHeight":"1.1","letterSpacing":"-0.02em","fontWeight":"600"}],"display-lg-mobile":["40px",{"lineHeight":"1.1","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"1.6","fontWeight":"400"}]}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/></head><body class="bg-surface-container-low font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-transparent transition-all duration-300" id="global-header"><div class="h-20 w-full px-margin-desktop flex items-center justify-between"><div class="flex-shrink-0 flex items-center gap-base"><span class="material-symbols-outlined text-primary text-headline-md">directions_car</span><span class="font-headline-md text-headline-md tracking-tighter uppercase text-on-surface">Aether</span></div><nav class="hidden md:flex items-center gap-lg absolute left-1/2 -translate-x-1/2" data-active-classes="text-primary font-medium"><a aria-current="page" class="transition-colors text-primary font-medium" data-path="inventory" href="#">INVENTORY</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="about" href="#">ABOUT</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="contact" href="#">CONTACT</a></nav><div class="flex items-center gap-md"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface" data-path="login" href="#">LOGIN</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center cursor-pointer"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 min-h-screen"><div class="flex flex-col w-full">
+<!-- Hero Section: Cinematic Integration -->
+<section class="relative h-[90vh] -mt-20 overflow-hidden flex items-end">
+<div class="absolute inset-0 z-0">
+<canvas class="absolute inset-0 w-full h-full z-10 opacity-40 mix-blend-overlay" id="heroCanvas"></canvas>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/20 z-20 pointer-events-none"></div>
+<img alt="Premium Automotive Interior Hero" class="w-full h-full object-cover scale-105 animate-[slow-zoom_20s_infinite_alternate]" src="https://lh3.googleusercontent.com/aida/AP1WRLs9oHi4qECu0aFMkx8hKBB5bsnNKc5IdxkBrvaOuLcvQF6DaTNH4_bwEYdORBV00vYoz-F_trVBwo9HPoaq3MPPh60VnmttLYYkGqbx74Ujif-85B-9ehQTyNV_XrWa8GCSDLJ8e7BQCP5WZ3BBwSiDChV0XZmVuXVDRYjUQFgI-wkhH1oiel5aE-oBWOz1Rz30EUEtJL-oAIsizBQxMTbFNmeoVa6rYC6I0jecfwoSeiMpHcKV3JsqZ6we"/>
+</div>
+<div class="relative z-30 px-margin-desktop pb-xl w-full max-w-5xl">
+<div class="flex flex-col gap-md opacity-0 translate-y-8 animate-[fade-up_1s_ease-out_forwards]">
+<span class="font-label-md text-label-md text-primary tracking-[0.2em] uppercase">The Future of Motion</span>
+<h1 class="font-display-lg text-display-lg text-white drop-shadow-2xl">Drive Your <br/><span class="italic font-light">Dream</span></h1>
+<p class="font-body-lg text-white/80 max-w-lg">Experience the pinnacle of automotive engineering. Aether combines raw performance with unparalleled sustainable luxury.</p>
+<div class="flex items-center gap-md mt-base">
+<button class="bg-primary hover:bg-primary-container text-white px-lg py-md rounded-full font-label-md transition-all duration-500 shadow-xl hover:scale-105">
+            EXPLORE INVENTORY
+          </button>
+<button class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-lg py-md rounded-full font-label-md transition-all hover:bg-white/20">
+            BOOK A TEST DRIVE
+          </button>
+</div>
+</div>
+</div>
+<!-- Scroll Indicator -->
+<div class="absolute bottom-md left-1/2 -translate-x-1/2 flex flex-col items-center gap-xs opacity-50 z-30">
+<div class="w-[1px] h-12 bg-white/40 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1/2 bg-white animate-[scroll-line_2s_infinite]"></div>
+</div>
+</div>
+</section>
+<!-- Inventory Carousel Section -->
+<section class="py-xl bg-surface overflow-hidden">
+<div class="px-margin-desktop mb-lg flex justify-between items-end">
+<div>
+<span class="font-label-md text-label-md text-primary uppercase">Current Fleet</span>
+<h2 class="font-display-lg text-headline-lg mt-xs text-[#2E2E2E]">Precision Inventory</h2>
+</div>
+<div class="flex gap-sm">
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary hover:text-white transition-colors" id="prevBtn">
+<span class="material-symbols-outlined">west</span>
+</button>
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary hover:text-white transition-colors" id="nextBtn">
+<span class="material-symbols-outlined">east</span>
+</button>
+</div>
+</div>
+<div class="flex gap-lg overflow-x-auto snap-x snap-mandatory px-margin-desktop no-scrollbar pb-md" id="carousel">
+<!-- Card 1 -->
+<div class="flex-shrink-0 w-[450px] snap-center group cursor-pointer inventory-card opacity-0 translate-y-8 animate-[fade-up_0.6s_ease-out_forwards_0.1s]" data-vehicle="Aether S1" style="perspective: 1000px;">
+<div class="relative h-[600px] rounded-xl overflow-hidden shadow-lg transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2 group-hover:rotate-x-2 group-hover:rotate-y-2" style="transform-style: preserve-3d;">
+<img alt="Aether S1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBbMcdXIWThuEAEN9tjCekbJ93QKPg9sCqg-O2K1vvhWTlkM2Lw7vU8_-hhpegi_iEZFUvJwHI4gfO2Rcs5OQXmG9kW9-27TH8XpiziXV9jC1BMIy2udUgcjduVVtlzTFRM3WBQSdFbh63OxP4US1cbJI2sgNGTe5Bv0aopgbrcqk1YtnqgqJeDcrT1MdknL1Hf6gjmn7P3ba_WnGTpyGVxUT_7826M2zKMcl4MqhASQ4hs5Zr5FGtyw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+<div class="absolute bottom-0 left-0 p-lg w-full text-white" style="transform: translateZ(30px);">
+<div class="flex justify-between items-end mb-md">
+<div>
+<h3 class="font-headline-lg text-headline-md">Aether S1</h3>
+<p class="font-label-md opacity-70">ELECTRIC GRAND TOURING</p>
+</div>
+<p class="font-headline-md text-primary">$124,500</p>
+</div>
+<div class="grid grid-cols-3 gap-sm border-t border-white/20 pt-md mb-lg">
+<div><p class="text-caption opacity-60">0-60 MPH</p><p class="font-label-md">2.4s</p></div>
+<div><p class="text-caption opacity-60">RANGE</p><p class="font-label-md">520mi</p></div>
+<div><p class="text-caption opacity-60">TOP SPEED</p><p class="font-label-md">168mph</p></div>
+</div>
+<button class="w-full py-md bg-white text-on-surface rounded-full font-label-md hover:bg-primary hover:text-white transition-colors">VIEW DETAILS</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex-shrink-0 w-[450px] snap-center group cursor-pointer inventory-card opacity-0 translate-y-8 animate-[fade-up_0.6s_ease-out_forwards_0.2s]" data-vehicle="Aether Apex" style="perspective: 1000px;">
+<div class="relative h-[600px] rounded-xl overflow-hidden shadow-lg transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2 group-hover:rotate-x-2 group-hover:-rotate-y-2" style="transform-style: preserve-3d;">
+<img alt="Aether Apex" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCd8eHBP6GWXJgvmIMFbu2luC3vMIL5Py4NpqlWDNwJ0XQs1Sx1I2sDBp65MPBrYZi8nrgFokhvhh_BEabyhIanscXjMbLlYb-gq2KEP0PSIyhAvsJ41KCwAk-B31dvYROLfwRAReaz9VFZI3ncZPt7cpBB2mAsAOYFubvgOuEw7ep50R4Y_9FT4AEkS_ZbCOIAU2uyekm0wp_E7jss6C4TMHU6XwyhjZTi7BzqpVABuTlyxC1BwelDaA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+<div class="absolute bottom-0 left-0 p-lg w-full text-white" style="transform: translateZ(30px);">
+<div class="flex justify-between items-end mb-md">
+<div>
+<h3 class="font-headline-lg text-headline-md">Aether Apex</h3>
+<p class="font-label-md opacity-70">PERFORMANCE SEDAN</p>
+</div>
+<p class="font-headline-md text-primary">$89,900</p>
+</div>
+<div class="grid grid-cols-3 gap-sm border-t border-white/20 pt-md mb-lg">
+<div><p class="text-caption opacity-60">0-60 MPH</p><p class="font-label-md">3.1s</p></div>
+<div><p class="text-caption opacity-60">RANGE</p><p class="font-label-md">410mi</p></div>
+<div><p class="text-caption opacity-60">TOP SPEED</p><p class="font-label-md">155mph</p></div>
+</div>
+<button class="w-full py-md bg-white text-on-surface rounded-full font-label-md hover:bg-primary hover:text-white transition-colors">VIEW DETAILS</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex-shrink-0 w-[450px] snap-center group cursor-pointer inventory-card opacity-0 translate-y-8 animate-[fade-up_0.6s_ease-out_forwards_0.3s]" data-vehicle="Aether Terra" style="perspective: 1000px;">
+<div class="relative h-[600px] rounded-xl overflow-hidden shadow-lg transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2 group-hover:rotate-x-2 group-hover:rotate-y-2" style="transform-style: preserve-3d;">
+<img alt="Aether Terra" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkA9MQpPJ2uiuTJn2WLhMWOiehPQB5xottlzKvn2eAQyLa9OhCcoVzrNMd5YKXDdE6w6xgiCmOUJ8f6LmLWaecyUi_C81oj9MGOSUl2mkTe0jNcDqadNWMu_rPJvfPpj4Xsc_Xl-1jNLmcuWy8OL8x_4GRk0woJqU6tQuXz-Rjw4S_-BbrNO4LUptPbioOrlhdkdkqUiirAytbeoqRjZ_l3pfaa-Ryd0jnHZCbd_TbifQteC0vNsMPKQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+<div class="absolute bottom-0 left-0 p-lg w-full text-white" style="transform: translateZ(30px);">
+<div class="flex justify-between items-end mb-md">
+<div>
+<h3 class="font-headline-lg text-headline-md">Aether Terra</h3>
+<p class="font-label-md opacity-70">ADVENTURE SUV</p>
+</div>
+<p class="font-headline-md text-primary">$112,000</p>
+</div>
+<div class="grid grid-cols-3 gap-sm border-t border-white/20 pt-md mb-lg">
+<div><p class="text-caption opacity-60">0-60 MPH</p><p class="font-label-md">4.2s</p></div>
+<div><p class="text-caption opacity-60">RANGE</p><p class="font-label-md">480mi</p></div>
+<div><p class="text-caption opacity-60">CLEARANCE</p><p class="font-label-md">11.5"</p></div>
+</div>
+<button class="w-full py-md bg-white text-on-surface rounded-full font-label-md hover:bg-primary hover:text-white transition-colors">VIEW DETAILS</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Side Panel Drawer -->
+<div class="fixed inset-y-0 right-0 w-full md:w-[600px] bg-surface-container-lowest z-[100] translate-x-full transition-transform duration-[800ms] ease-[cubic-bezier(0.175,0.885,0.32,1.275)] shadow-2xl flex flex-col" id="sideDrawer">
+<div class="p-lg flex justify-between items-center border-b border-outline-variant bg-white/80 backdrop-blur-md sticky top-0 z-10">
+<h2 class="font-headline-md text-[#2E2E2E]" id="drawerTitle">Vehicle Details</h2>
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-high flex items-center justify-center transition-colors" id="closeDrawer">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-lg">
+<div class="h-80 w-full rounded-lg overflow-hidden mb-lg">
+<img alt="Detail View" class="w-full h-full object-cover" id="drawerImage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBbMcdXIWThuEAEN9tjCekbJ93QKPg9sCqg-O2K1vvhWTlkM2Lw7vU8_-hhpegi_iEZFUvJwHI4gfO2Rcs5OQXmG9kW9-27TH8XpiziXV9jC1BMIy2udUgcjduVVtlzTFRM3WBQSdFbh63OxP4US1cbJI2sgNGTe5Bv0aopgbrcqk1YtnqgqJeDcrT1MdknL1Hf6gjmn7P3ba_WnGTpyGVxUT_7826M2zKMcl4MqhASQ4hs5Zr5FGtyw"/>
+</div>
+<div class="flex flex-col gap-lg">
+<div>
+<span class="font-label-md text-primary">PERFORMANCE SPECIFICATIONS</span>
+<div class="grid grid-cols-2 gap-md mt-md">
+<div class="p-md bg-surface rounded-lg">
+<p class="text-caption text-on-surface-variant uppercase">Battery Pack</p>
+<p class="font-body-lg font-medium text-[#2E2E2E]">118 kWh Lithium-Ion</p>
+</div>
+<div class="p-md bg-surface rounded-lg">
+<p class="text-caption text-on-surface-variant uppercase">Drive Configuration</p>
+<p class="font-body-lg font-medium text-[#2E2E2E]">Dual Motor AWD</p>
+</div>
+<div class="p-md bg-surface rounded-lg">
+<p class="text-caption text-on-surface-variant uppercase">Charge Speed</p>
+<p class="font-body-lg font-medium text-[#2E2E2E]">20min (10-80%)</p>
+</div>
+<div class="p-md bg-surface rounded-lg">
+<p class="text-caption text-on-surface-variant uppercase">Peak Output</p>
+<p class="font-body-lg font-medium text-[#2E2E2E]">1,111 Horsepower</p>
+</div>
+</div>
+</div>
+<div>
+<span class="font-label-md text-primary">INTERIOR EXPERIENCE</span>
+<p class="font-body-md text-on-surface-variant mt-sm">Crafted with responsibly sourced alpaca wool and open-pore eucalyptus wood. The Aether interior is a sanctuary of silence and tactile delight.</p>
+</div>
+<div class="sticky bottom-0 bg-surface-container-lowest pt-lg border-t border-outline-variant flex gap-md">
+<button class="flex-1 bg-primary text-white py-lg rounded-full font-label-md shadow-lg">RESERVE NOW</button>
+<button class="px-lg bg-surface-container-high rounded-full font-label-md">SHARE</button>
+</div>
+</div>
+</div>
+</div>
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-[99] opacity-0 pointer-events-none transition-opacity duration-500" id="drawerOverlay"></div>
+<!-- About Section: Storytelling -->
+<section class="py-xl bg-on-surface text-surface overflow-hidden transition-transform duration-1000 origin-bottom relative z-10" id="about">
+<div class="px-margin-desktop grid md:grid-cols-2 gap-xl items-center">
+<div class="relative order-2 md:order-1">
+<div class="absolute -top-12 -left-12 w-64 h-64 bg-primary/20 rounded-full blur-[100px]"></div>
+<img alt="Engineering Detail" class="rounded-xl shadow-2xl relative z-10 w-full h-[600px] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkrIAG1fAeTGORPNx9filITy_epC8xc8mWzwUS09NzYTM9OM40BZK_7nWIkPTKMJFi1SHD0UevESDoTExxVFVj0MvNe73Ec0ZneZ3CPaP5Dg2PbmBVP0B2WM_Iov2blGWSHojtfB5mFK4LkqCNXJ6BQ_65wA75Ql4enBVlVu3c7MyHjaACW576MEkAWdDQiy3mvsnHH2dRYKsOYYPja3rWDzzukt4V854ir4EY-NZuGUac3Hne3q9fqQ"/>
+</div>
+<div class="order-1 md:order-2">
+<span class="font-label-md text-primary uppercase tracking-widest">Our Heritage</span>
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg leading-tight mt-sm">Designing <br/> The Silence.</h2>
+<p class="font-body-lg text-white/70 mt-lg leading-relaxed max-w-xl">
+          Founded in the pursuit of pure sensory luxury, Aether Automotive Group redefines what it means to move. Every curve is wind-tunnel tested, every stitch is hand-finished, and every electron is accounted for.
+        </p>
+<div class="grid grid-cols-2 gap-lg mt-xl">
+<div>
+<div class="flex items-baseline gap-xs">
+<span class="font-display-lg text-primary counter" data-target="98">0</span>
+<span class="font-headline-md text-primary">%</span>
+</div>
+<p class="font-label-md uppercase opacity-60">Recyclable Materials</p>
+</div>
+<div>
+<div class="flex items-baseline gap-xs">
+<span class="font-display-lg text-primary counter" data-target="15">0</span>
+<span class="font-headline-md text-primary">k</span>
+</div>
+<p class="font-label-md uppercase opacity-60">Patents Pending</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<style>
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(2rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slow-zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+  }
+  @keyframes scroll-line {
+    0% { transform: translateY(-100%); }
+    50% { transform: translateY(100%); }
+    100% { transform: translateY(200%); }
+  }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+<script>
+  // WebGL Shader Background Logic
+  const canvas = document.getElementById('heroCanvas');
+  if (canvas) {
+      const gl = canvas.getContext('webgl');
+      if (gl) {
+          const vsSource = `
+              attribute vec4 aVertexPosition;
+              attribute vec2 aTextureCoord;
+              varying vec2 v_texCoord;
+              void main(void) {
+                  gl_Position = aVertexPosition;
+                  v_texCoord = aTextureCoord;
+              }
+          `;
+          const fsSource = `
+              precision highp float;
+              uniform float u_time;
+              uniform vec2 u_resolution;
+              uniform vec2 u_mouse;
+              varying vec2 v_texCoord;
+
+              void main() {
+                  vec2 uv = v_texCoord;
+                  vec2 mouse = u_mouse / u_resolution;
+                  
+                  // Create a smooth, flowing organic gradient effect
+                  float noise1 = sin(uv.x * 3.0 + u_time * 0.5) * 0.5 + 0.5;
+                  float noise2 = cos(uv.y * 2.0 - u_time * 0.3) * 0.5 + 0.5;
+                  
+                  // Mix brand colors based on procedural noise
+                  vec3 colorA = vec3(0.976, 0.976, 0.976); // #F9F9F9 Surface
+                  vec3 colorB = vec3(1.0, 0.478, 0.0);    // #FF7A00 Orange Accent
+                  vec3 colorC = vec3(0.18, 0.18, 0.18);    // #2E2E2E Charcoal
+                  
+                  float mask = smoothstep(0.4, 0.6, noise1 * noise2 + length(uv - mouse) * 0.2);
+                  
+                  vec3 finalColor = mix(colorA, colorB, mask * 0.1); // Very subtle accent bleed
+                  finalColor = mix(finalColor, colorA, 0.95); // Keep it mostly light and clean as requested
+                  
+                  gl_FragColor = vec4(finalColor, 1.0);
+              }
+          `;
+
+          function loadShader(gl, type, source) {
+              const shader = gl.createShader(type);
+              gl.shaderSource(shader, source);
+              gl.compileShader(shader);
+              if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                  console.error('An error occurred compiling the shaders: ' + gl.getShaderInfoLog(shader));
+                  gl.deleteShader(shader);
+                  return null;
+              }
+              return shader;
+          }
+
+          const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
+          const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+
+          const shaderProgram = gl.createProgram();
+          gl.attachShader(shaderProgram, vertexShader);
+          gl.attachShader(shaderProgram, fragmentShader);
+          gl.linkProgram(shaderProgram);
+
+          const programInfo = {
+              program: shaderProgram,
+              attribLocations: {
+                  vertexPosition: gl.getAttribLocation(shaderProgram, 'aVertexPosition'),
+                  textureCoord: gl.getAttribLocation(shaderProgram, 'aTextureCoord'),
+              },
+              uniformLocations: {
+                  resolution: gl.getUniformLocation(shaderProgram, 'u_resolution'),
+                  time: gl.getUniformLocation(shaderProgram, 'u_time'),
+                  mouse: gl.getUniformLocation(shaderProgram, 'u_mouse'),
+              },
+          };
+
+          const positions = new Float32Array([
+              -1.0,  1.0,
+               1.0,  1.0,
+              -1.0, -1.0,
+               1.0, -1.0,
+          ]);
+          const textureCoords = new Float32Array([
+              0.0,  0.0,
+              1.0,  0.0,
+              0.0,  1.0,
+              1.0,  1.0,
+          ]);
+
+          const positionBuffer = gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+          gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+
+          const textureCoordBuffer = gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER, textureCoordBuffer);
+          gl.bufferData(gl.ARRAY_BUFFER, textureCoords, gl.STATIC_DRAW);
+
+          let mouseX = 0, mouseY = 0;
+          canvas.addEventListener('mousemove', (e) => {
+              const rect = canvas.getBoundingClientRect();
+              mouseX = e.clientX - rect.left;
+              mouseY = e.clientY - rect.top;
+          });
+
+          function resizeCanvasToDisplaySize(canvas) {
+              const displayWidth  = canvas.clientWidth;
+              const displayHeight = canvas.clientHeight;
+              if (canvas.width  !== displayWidth || canvas.height !== displayHeight) {
+                  canvas.width  = displayWidth;
+                  canvas.height = displayHeight;
+              }
+          }
+
+          function render(now) {
+              now *= 0.001; 
+              resizeCanvasToDisplaySize(gl.canvas);
+              gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+              
+              gl.useProgram(programInfo.program);
+              
+              gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+              gl.vertexAttribPointer(programInfo.attribLocations.vertexPosition, 2, gl.FLOAT, false, 0, 0);
+              gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
+              
+              gl.bindBuffer(gl.ARRAY_BUFFER, textureCoordBuffer);
+              gl.vertexAttribPointer(programInfo.attribLocations.textureCoord, 2, gl.FLOAT, false, 0, 0);
+              gl.enableVertexAttribArray(programInfo.attribLocations.textureCoord);
+              
+              gl.uniform2f(programInfo.uniformLocations.resolution, gl.canvas.width, gl.canvas.height);
+              gl.uniform1f(programInfo.uniformLocations.time, now);
+              gl.uniform2f(programInfo.uniformLocations.mouse, mouseX, mouseY);
+              
+              gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+              requestAnimationFrame(render);
+          }
+          requestAnimationFrame(render);
+      }
+  }
+
+
+  // Side Drawer Logic
+  const sideDrawer = document.getElementById('sideDrawer');
+  const overlay = document.getElementById('drawerOverlay');
+  const inventoryCards = document.querySelectorAll('.inventory-card');
+  const closeDrawer = document.getElementById('closeDrawer');
+  const drawerTitle = document.getElementById('drawerTitle');
+  const drawerImage = document.getElementById('drawerImage');
+
+  inventoryCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const vehicle = card.getAttribute('data-vehicle');
+      const img = card.querySelector('img').src;
+      drawerTitle.innerText = vehicle;
+      drawerImage.src = img;
+      
+      sideDrawer.style.transform = 'translateX(0)';
+      overlay.style.opacity = '1';
+      overlay.style.pointerEvents = 'auto';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  const closeAction = () => {
+    sideDrawer.style.transform = 'translateX(100%)';
+    overlay.style.opacity = '0';
+    overlay.style.pointerEvents = 'none';
+    document.body.style.overflow = '';
+  };
+
+  closeDrawer.addEventListener('click', closeAction);
+  overlay.addEventListener('click', closeAction);
+
+  // Carousel Navigation
+  const carousel = document.getElementById('carousel');
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    carousel.scrollBy({ left: 474, behavior: 'smooth' });
+  });
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    carousel.scrollBy({ left: -474, behavior: 'smooth' });
+  });
+
+  // Animated Counters
+  const observerOptions = {
+    threshold: 0.5
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counter = entry.target;
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const increment = target / 50;
+
+        if (count < target) {
+          const updateCount = () => {
+            const current = +counter.innerText;
+            if (current < target) {
+              counter.innerText = Math.ceil(current + increment);
+              setTimeout(updateCount, 20);
+            } else {
+              counter.innerText = target;
+            }
+          };
+          updateCount();
+        }
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.counter').forEach(el => observer.observe(el));
+</script></main><footer class="w-full bg-surface-container py-xl sticky bottom-0 z-0"><div class="px-margin-desktop flex flex-col md:flex-row justify-between items-start gap-lg"><div class="max-w-xs"><div class="flex items-center gap-base mb-md"><span class="material-symbols-outlined text-primary">directions_car</span><span class="font-headline-md text-headline-md tracking-tighter uppercase text-[#2E2E2E]">Aether</span></div><p class="font-body-md text-body-md text-on-surface-variant">Defining the future of luxury mobility through precision engineering and minimalist design.</p></div><div class="grid grid-cols-2 gap-xl"><div class="flex flex-col gap-sm"><span class="font-label-md text-label-md text-primary">SOCIAL</span><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Instagram</a><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">LinkedIn</a></div><div class="flex flex-col gap-sm"><span class="font-label-md text-label-md text-primary">LEGAL</span><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy</a><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Terms</a></div></div></div><div class="px-margin-desktop border-t border-outline-variant mt-lg pt-md text-caption text-on-tertiary-fixed-variant">© 2024 Aether Automotive Group. All rights reserved.</div></footer><script>window.addEventListener('scroll', () => { const header = document.getElementById('global-header'); if (window.scrollY > 20) { header.classList.add('bg-surface/80', 'backdrop-blur-xl', 'shadow-[0_1px_8px_rgba(0,0,0,0.04)]'); header.classList.remove('bg-transparent'); } else { header.classList.remove('bg-surface/80', 'backdrop-blur-xl', 'shadow-[0_1px_8px_rgba(0,0,0,0.04)]'); header.classList.add('bg-transparent'); } });</script></body></html>

@@ -1,0 +1,126 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}header{transition:background-color 0.3s ease,backdrop-filter 0.3s ease;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary-fixed":"#1b1c1c","on-surface":"#1a1c1c","tertiary":"#5d5f5f","surface-container-high":"#e8e8e8","surface-container-low":"#f4f3f3","surface-tint":"#994700","on-error-container":"#93000a","surface-bright":"#f9f9f9","primary-fixed":"#ffdbc8","outline-variant":"#e0c0af","on-tertiary":"#ffffff","primary-fixed-dim":"#ffb68b","surface-container-highest":"#e2e2e2","inverse-primary":"#ffb68b","on-tertiary-fixed":"#1a1c1c","secondary-fixed-dim":"#c8c6c6","on-background":"#1a1c1c","on-surface-variant":"#584235","tertiary-fixed":"#e2e2e2","primary":"#994700","on-error":"#ffffff","inverse-surface":"#2f3131","tertiary-fixed-dim":"#c6c6c7","inverse-on-surface":"#f1f1f1","surface-container-lowest":"#ffffff","secondary-fixed":"#e4e2e1","on-secondary":"#ffffff","on-tertiary-fixed-variant":"#454747","on-secondary-container":"#656464","on-primary":"#ffffff","tertiary-container":"#9fa0a0","surface":"#f9f9f9","surface-dim":"#dadada","secondary":"#5f5e5e","on-primary-fixed":"#321200","surface-container":"#eeeeee","outline":"#8c7263","on-primary-fixed-variant":"#753400","primary-container":"#ff7a00","error-container":"#ffdad6","on-primary-container":"#5c2800","secondary-container":"#e4e2e1","on-tertiary-container":"#353737","surface-variant":"#e2e2e2","error":"#ba1a1a","on-secondary-fixed-variant":"#474747","background":"#f9f9f9"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"sm":"12px","margin-mobile":"20px","xl":"80px","xs":"4px","gutter":"24px","lg":"48px","md":"24px","base":"8px","margin-desktop":"64px"},"fontFamily":{"headline-md":["Inter"],"body-md":["Inter"],"caption":["Inter"],"headline-lg":["Inter"],"label-md":["Inter"],"display-lg":["Inter"],"display-lg-mobile":["Inter"],"body-lg":["Inter"]},"fontSize":{"headline-md":["24px",{"lineHeight":"1.3","fontWeight":"500"}],"body-md":["16px",{"lineHeight":"1.6","fontWeight":"400"}],"caption":["12px",{"lineHeight":"1.4","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"1.2","letterSpacing":"-0.01em","fontWeight":"500"}],"label-md":["14px",{"lineHeight":"1","letterSpacing":"0.05em","fontWeight":"600"}],"display-lg":["64px",{"lineHeight":"1.1","letterSpacing":"-0.02em","fontWeight":"600"}],"display-lg-mobile":["40px",{"lineHeight":"1.1","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["18px",{"lineHeight":"1.6","fontWeight":"400"}]}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface-container-low font-body-md text-on-surface"><header class="fixed top-0 w-full z-50 bg-transparent transition-all duration-300" id="global-header"><div class="h-20 w-full px-margin-desktop flex items-center justify-between"><div class="flex-shrink-0 flex items-center gap-base"><span class="material-symbols-outlined text-primary text-headline-md">directions_car</span><span class="font-headline-md text-headline-md tracking-tighter uppercase text-on-surface">Aether</span></div><nav class="hidden md:flex items-center gap-lg absolute left-1/2 -translate-x-1/2" data-active-classes="text-primary font-medium"><a aria-current="page" class="transition-colors text-primary font-medium" data-path="inventory" href="#">INVENTORY</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="about" href="#">ABOUT</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="contact" href="#">CONTACT</a></nav><div class="flex items-center gap-md"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface" data-path="login" href="#">LOGIN</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center cursor-pointer"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 min-h-screen"><div class="flex flex-col w-full relative">
+<!-- Fixed Background Layer -->
+<div class="fixed inset-0 w-full h-full -z-10 overflow-hidden pointer-events-none">
+<div class="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-[20s] ease-out scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida/AP1WRLs9oHi4qECu0aFMkx8hKBB5bsnNKc5IdxkBrvaOuLcvQF6DaTNH4_bwEYdORBV00vYoz-F_trVBwo9HPoaq3MPPh60VnmttLYYkGqbx74Ujif-85B-9ehQTyNV_XrWa8GCSDLJ8e7BQCP5WZ3BBwSiDChV0XZmVuXVDRYjUQFgI-wkhH1oiel5aE-oBWOz1Rz30EUEtJL-oAIsizBQxMTbFNmeoVa6rYC6I0jecfwoSeiMpHcKV3JsqZ6we'); filter: blur(4px);"></div>
+<div class="absolute inset-0 w-full h-full bg-inverse-surface/60 mix-blend-multiply"></div>
+<div class="absolute inset-0 w-full h-full bg-gradient-to-b from-transparent to-inverse-surface/90"></div>
+</div>
+<!-- Main Auth Container -->
+<div class="flex flex-col flex-grow items-center justify-center w-full px-margin-mobile py-margin-desktop lg:py-[120px]">
+<!-- Glassmorphic Auth Panel -->
+<div class="w-full max-w-[440px] bg-surface-container-lowest/80 backdrop-blur-2xl rounded-[32px] p-8 md:p-10 shadow-[0_30px_60px_rgba(0,0,0,0.12)] opacity-0 translate-y-8 transition-all duration-1000 ease-out" id="auth-panel">
+<!-- Tabs -->
+<div class="flex items-center gap-md mb-10 relative">
+<button class="font-label-md text-label-md text-on-surface tracking-widest pb-2 transition-colors auth-tab active" data-tab="signin">SIGN IN</button>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface tracking-widest pb-2 transition-colors auth-tab" data-tab="join">JOIN CLUB</button>
+<!-- Active Indicator -->
+<div class="absolute bottom-0 left-0 h-[2px] w-[60px] bg-primary-container transition-transform duration-300 ease-out" id="tab-indicator"></div>
+</div>
+<form class="flex flex-col gap-6" id="auth-form" onsubmit="event.preventDefault();">
+<!-- Input Group: Email -->
+<div class="flex flex-col relative group stagger-item opacity-0 translate-y-4 transition-all duration-700 ease-out" style="transition-delay: 100ms;">
+<div class="flex items-center gap-3 py-3">
+<span class="material-symbols-outlined text-on-surface-variant/50 group-focus-within:text-primary-container transition-colors text-[20px]">mail</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/40 outline-none" placeholder="Email Address" required="" type="email"/>
+</div>
+<!-- Minimalist Underline -->
+<div class="absolute bottom-0 left-0 w-full h-[1px] bg-surface-variant transition-all duration-300 group-focus-within:h-[2px] group-focus-within:bg-primary-container"></div>
+</div>
+<!-- Input Group: Password -->
+<div class="flex flex-col relative group stagger-item opacity-0 translate-y-4 transition-all duration-700 ease-out" style="transition-delay: 200ms;">
+<div class="flex items-center gap-3 py-3">
+<span class="material-symbols-outlined text-on-surface-variant/50 group-focus-within:text-primary-container transition-colors text-[20px]">lock</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/40 outline-none" placeholder="Passcode" required="" type="password"/>
+<button class="text-on-surface-variant/50 hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility_off</span>
+</button>
+</div>
+<!-- Minimalist Underline -->
+<div class="absolute bottom-0 left-0 w-full h-[1px] bg-surface-variant transition-all duration-300 group-focus-within:h-[2px] group-focus-within:bg-primary-container"></div>
+</div>
+<!-- Options Row -->
+<div class="flex items-center justify-between mt-2 stagger-item opacity-0 translate-y-4 transition-all duration-700 ease-out" style="transition-delay: 300ms;">
+<label class="flex items-center gap-2 cursor-pointer group">
+<div class="w-4 h-4 rounded-sm bg-surface-variant flex items-center justify-center transition-colors group-hover:bg-outline-variant">
+<!-- Checked state would show checkmark here -->
+</div>
+<span class="font-caption text-caption text-on-surface-variant">Keep me signed in</span>
+</label>
+<a class="font-caption text-caption text-on-surface-variant hover:text-primary-container transition-colors" href="#">Forgot access?</a>
+</div>
+<!-- Primary Button -->
+<button class="mt-6 w-full py-4 rounded-full bg-primary-container text-on-primary-container font-label-md text-label-md flex items-center justify-center gap-2 hover:shadow-[0_8px_16px_rgba(255,122,0,0.25)] hover:scale-[1.02] transition-all duration-300 stagger-item opacity-0 translate-y-4 ease-out" style="transition-delay: 400ms;" type="submit">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+          INITIALIZE ENGINE
+        </button>
+<!-- Social Auth -->
+<div class="mt-8 flex flex-col gap-6 stagger-item opacity-0 translate-y-4 transition-all duration-700 ease-out" style="transition-delay: 500ms;">
+<div class="flex items-center gap-4">
+<div class="flex-grow h-[1px] bg-surface-variant"></div>
+<span class="font-caption text-caption text-on-surface-variant tracking-widest uppercase text-[10px]">Or connect via</span>
+<div class="flex-grow h-[1px] bg-surface-variant"></div>
+</div>
+<div class="flex items-center justify-center gap-4">
+<button class="w-12 h-12 rounded-full bg-surface-container-highest hover:bg-surface-variant flex items-center justify-center transition-colors group" type="button">
+<span class="material-symbols-outlined text-on-surface group-hover:text-primary-container transition-colors">language</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-surface-container-highest hover:bg-surface-variant flex items-center justify-center transition-colors group" type="button">
+<span class="material-symbols-outlined text-on-surface group-hover:text-primary-container transition-colors">share</span>
+</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+<!-- Footer Micro-interactions -->
+<div class="w-full px-margin-desktop pb-8 flex flex-col md:flex-row items-center justify-between gap-4 mt-auto">
+<div class="flex items-center gap-6 font-caption text-caption text-on-tertiary/70">
+<a class="hover:text-on-tertiary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-on-tertiary transition-colors" href="#">Contact Support</a>
+</div>
+<div class="flex items-center gap-2 font-caption text-caption text-on-tertiary/70 bg-inverse-surface/40 backdrop-blur-md px-3 py-1.5 rounded-full">
+<div class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></div>
+<span class="font-mono tracking-wider">LATENCY: 12ms</span>
+</div>
+</div>
+</div>
+<script>
+  // Panel Entry Animation
+  document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+      document.getElementById('auth-panel').classList.remove('opacity-0', 'translate-y-8');
+      
+      const staggerItems = document.querySelectorAll('.stagger-item');
+      staggerItems.forEach(item => {
+        item.classList.remove('opacity-0', 'translate-y-4');
+      });
+    }, 100);
+
+    // Tab Switching Logic
+    const tabs = document.querySelectorAll('.auth-tab');
+    const indicator = document.getElementById('tab-indicator');
+    
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', (e) => {
+        // Reset classes
+        tabs.forEach(t => {
+          t.classList.remove('text-on-surface', 'active');
+          t.classList.add('text-on-surface-variant');
+        });
+        
+        // Set active
+        e.target.classList.add('text-on-surface', 'active');
+        e.target.classList.remove('text-on-surface-variant');
+        
+        // Move indicator
+        const targetLeft = e.target.offsetLeft;
+        const targetWidth = e.target.offsetWidth;
+        
+        indicator.style.transform = `translateX(${targetLeft}px)`;
+        indicator.style.width = `${targetWidth}px`;
+      });
+    });
+  });
+</script></main><footer class="w-full bg-surface-container py-xl mt-xl"><div class="px-margin-desktop flex flex-col md:flex-row justify-between items-start gap-lg"><div class="max-w-xs"><div class="flex items-center gap-base mb-md"><span class="material-symbols-outlined text-primary">directions_car</span><span class="font-headline-md text-headline-md tracking-tighter uppercase">Aether</span></div><p class="font-body-md text-body-md text-on-surface-variant">Defining the future of luxury mobility through precision engineering and minimalist design.</p></div><div class="grid grid-cols-2 gap-xl"><div class="flex flex-col gap-sm"><span class="font-label-md text-label-md text-primary">SOCIAL</span><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Instagram</a><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">LinkedIn</a></div><div class="flex flex-col gap-sm"><span class="font-label-md text-label-md text-primary">LEGAL</span><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy</a><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Terms</a></div></div></div><div class="px-margin-desktop border-t border-outline-variant mt-lg pt-md text-caption text-on-tertiary-fixed-variant">© 2024 Aether Automotive Group. All rights reserved.</div></footer><script>window.addEventListener('scroll', () => { const header = document.getElementById('global-header'); if (window.scrollY > 20) { header.classList.add('bg-surface/80', 'backdrop-blur-xl', 'shadow-[0_1px_8px_rgba(0,0,0,0.04)]'); header.classList.remove('bg-transparent'); } else { header.classList.remove('bg-surface/80', 'backdrop-blur-xl', 'shadow-[0_1px_8px_rgba(0,0,0,0.04)]'); header.classList.add('bg-transparent'); } });</script></body></html>
