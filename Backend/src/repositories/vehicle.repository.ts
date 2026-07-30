@@ -49,3 +49,13 @@ export const updateVehicle = async (
     });
 
 };
+
+export const deleteVehicle = async (id: number) => {
+
+    return prisma.vehicle.delete({
+        where: {
+            id,
+        },
+    });
+
+};

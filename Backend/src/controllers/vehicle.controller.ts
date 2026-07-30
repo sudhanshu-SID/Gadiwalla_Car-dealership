@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createVehicle as createVehicleService, getAllVehicles as getAllVehiclesService, getVehicleById as getVehicleByIdService, updateVehicle as updateVehicleService,} from "../services/vehicle.services";
+import { createVehicle as createVehicleService, getAllVehicles as getAllVehiclesService, getVehicleById as getVehicleByIdService, updateVehicle as updateVehicleService, deleteVehicle as deleteVehicleService,} from "../services/vehicle.services";
 
 export const createVehicle = async (
     req: Request,
@@ -84,6 +84,31 @@ export const updateVehicle = async (
         const vehicle = await updateVehicleService(id, req.body);
 
         return res.status(200).json(vehicle);
+
+    } catch {
+
+        return res.status(500).json({
+            message: "Internal Server Error",
+        });
+
+    }
+
+};
+
+ export const deleteVehicle = async (
+    req: Request,
+    res: Response
+    ) => {
+
+    try {
+
+        const id = Number(req.params.id);
+
+        await deleteVehicleService(id);
+
+        return res.status(200).json({
+            message: "Vehicle deleted successfully",
+        });
 
     } catch {
 

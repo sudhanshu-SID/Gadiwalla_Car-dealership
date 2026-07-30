@@ -2,7 +2,7 @@ import { createVehicle as createVehicleRepository } from "../repositories/vehicl
 import { getAllVehicles as getAllVehiclesRepository } from "../repositories/vehicle.repository";
 import { getVehicleById as getVehicleByIdRepository } from "../repositories/vehicle.repository";
 import { updateVehicle as updateVehicleRepository } from "../repositories/vehicle.repository";
-
+import { deleteVehicle as deleteVehicleRepository } from "../repositories/vehicle.repository";
 
 export interface CreateVehicleData {
     make: string;
@@ -34,5 +34,11 @@ export const getVehicleById = async (id: number) => {
     vehicleData: CreateVehicleData ) => {
 
     return await updateVehicleRepository(id, vehicleData);
+
+};
+
+export const deleteVehicle = async ( id: number) => {
+
+    return await deleteVehicleRepository(id);
 
 };
