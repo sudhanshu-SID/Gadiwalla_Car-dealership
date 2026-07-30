@@ -205,3 +205,5 @@ AI significantly improved my development workflow by reducing the time spent wri
 Using multiple AI tools also exposed me to different implementation approaches, allowing me to compare suggestions instead of relying on a single source.
 
 The final project reflects manual integration, testing, debugging, and refinement of AI-generated suggestions rather than directly accepting generated code. Every feature was reviewed, validated, and adapted before being included in the final application.
+
+
