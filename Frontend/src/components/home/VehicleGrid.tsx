@@ -8,6 +8,7 @@ import type { SortOption } from './SortDropdown';
 import LoadingSkeleton from '../common/LoadingSkeleton';
 import EmptyState from '../common/EmptyState';
 import ErrorState from '../common/ErrorState';
+import { filterVehicles } from '../../utils/filterVehicles';
 
 const CATEGORIES = ['ALL', 'Electric', 'Sedan', 'SUV', 'Coupe', 'Hybrid'];
 
@@ -32,42 +33,15 @@ export default function VehicleGrid({
   const [year, setYear] = useState('ALL');
   const [sort, setSort] = useState<SortOption>('FEATURED');
 
+  // Memoize filtered and sorted results using filterVehicles helper utility
   const filteredVehicles = useMemo(() => {
-    return vehicles
-      .filter((v) => {
-        // Search query
-        if (search.trim()) {
-          const q = search.toLowerCase();
-          const matches =
-            v.brand.toLowerCase().includes(q) ||
-            v.model.toLowerCase().includes(q) ||
-            v.category.toLowerCase().includes(q) ||
-            v.year.toString().includes(q);
-          if (!matches) return false;
-        }
-
-        // Category filter
-        if (category !== 'ALL' && v.category.toLowerCase() !== category.toLowerCase()) {
-          return false;
-        }
-
-        // Price range filter
-        if (priceRange === 'UNDER_100K' && v.price >= 100000) return false;
-        if (priceRange === '100K_150K' && (v.price < 100000 || v.price > 150000)) return false;
-        if (priceRange === 'OVER_150K' && v.price <= 150000) return false;
-
-        // Year filter
-        if (year !== 'ALL' && v.year.toString() !== year) return false;
-
-        return true;
-      })
-      .sort((a, b) => {
-        if (sort === 'PRICE_LOW_HIGH') return a.price - b.price;
-        if (sort === 'PRICE_HIGH_LOW') return b.price - a.price;
-        if (sort === 'YEAR_NEWEST') return b.year - a.year;
-        if (sort === 'NAME_AZ') return `${a.brand} ${a.model}`.localeCompare(`${b.brand} ${b.model}`);
-        return 0;
-      });
+    return filterVehicles(vehicles, {
+      search,
+      category,
+      priceRange,
+      year,
+      sort,
+    });
   }, [vehicles, search, category, priceRange, year, sort]);
 
   const resetFilters = () => {
