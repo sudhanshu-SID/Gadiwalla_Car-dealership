@@ -351,9 +351,9 @@ export default function AddVehicleModal({
                   {isLoading ? (
                     <Loader2 size={16} className="animate-spin" />
                   ) : isEditing ? (
-                    'Save Changes'
+                    'Confirm Changes'
                   ) : (
-                    'Add Vehicle'
+                    'Confirm Add Vehicle'
                   )}
                 </button>
               </div>

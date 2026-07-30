@@ -229,6 +229,7 @@ export default function Home() {
         onPurchase={handlePurchaseVehicle}
         purchasingId={purchasingId}
         isAuthenticated={isAuthenticated}
+        isAdmin={isAdminUser}
       />
 
       {/* 4. About Us Section */}

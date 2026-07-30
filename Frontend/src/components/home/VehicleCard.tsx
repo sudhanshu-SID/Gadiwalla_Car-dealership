@@ -24,6 +24,7 @@ interface VehicleCardProps {
   onPurchase?: (vehicle: Vehicle) => void;
   isPurchasing?: boolean;
   isAuthenticated?: boolean;
+  isAdmin?: boolean;
   index?: number;
 }
 
@@ -33,6 +34,7 @@ export default function VehicleCard({
   onPurchase,
   isPurchasing = false,
   isAuthenticated = false,
+  isAdmin = false,
   index = 0,
 }: VehicleCardProps) {
   const isSold = vehicle.status === 'SOLD';
@@ -129,8 +131,8 @@ export default function VehicleCard({
           <ChevronRight size={15} />
         </button>
 
-        {/* Purchase Button (Visible for Authenticated Users) */}
-        {isAuthenticated && (
+        {/* Purchase Button (Visible for Authenticated Users, Hidden for Admins) */}
+        {isAuthenticated && !isAdmin && (
           <button
             onClick={(e) => {
               e.stopPropagation();

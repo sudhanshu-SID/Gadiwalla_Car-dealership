@@ -217,42 +217,44 @@ export default function VehicleDetailsDrawer({
 
             {/* Sticky Action Footer */}
             <div className="p-6 border-t border-border bg-surface flex items-center gap-4">
-              <button
-                onClick={() => {
-                  if (!isAuthenticated) {
-                    onClose();
-                    navigate('/login');
-                    return;
-                  }
-                  if (onPurchase && vehicle.status !== 'SOLD' && !isPurchasing) {
-                    onPurchase(vehicle);
-                  }
-                }}
-                disabled={vehicle.status === 'SOLD' || isPurchasing}
-                className={`flex-1 py-4 rounded-button font-semibold tracking-wider uppercase transition-all shadow-fab hover:shadow-fab-hover flex items-center justify-center gap-2 text-label ${
-                  vehicle.status === 'SOLD'
-                    ? 'bg-secondary/40 text-text-muted cursor-not-allowed border border-border'
-                    : isPurchasing
-                    ? 'bg-primary/80 text-white cursor-wait opacity-80'
-                    : 'bg-primary hover:bg-primary-hover text-white active:scale-98'
-                }`}
-              >
-                {isPurchasing ? (
-                  <>
-                    <Loader2 size={18} className="animate-spin" />
-                    <span>Processing Purchase...</span>
-                  </>
-                ) : vehicle.status === 'SOLD' ? (
-                  <span>Out of Stock</span>
-                ) : !isAuthenticated ? (
-                  <span>Sign In to Purchase</span>
-                ) : (
-                  <>
-                    <ShoppingBag size={18} />
-                    <span>Purchase Vehicle</span>
-                  </>
-                )}
-              </button>
+              {!isAdmin && (
+                <button
+                  onClick={() => {
+                    if (!isAuthenticated) {
+                      onClose();
+                      navigate('/login');
+                      return;
+                    }
+                    if (onPurchase && vehicle.status !== 'SOLD' && !isPurchasing) {
+                      onPurchase(vehicle);
+                    }
+                  }}
+                  disabled={vehicle.status === 'SOLD' || isPurchasing}
+                  className={`flex-1 py-4 rounded-button font-semibold tracking-wider uppercase transition-all shadow-fab hover:shadow-fab-hover flex items-center justify-center gap-2 text-label ${
+                    vehicle.status === 'SOLD'
+                      ? 'bg-secondary/40 text-text-muted cursor-not-allowed border border-border'
+                      : isPurchasing
+                      ? 'bg-primary/80 text-white cursor-wait opacity-80'
+                      : 'bg-primary hover:bg-primary-hover text-white active:scale-98'
+                  }`}
+                >
+                  {isPurchasing ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" />
+                      <span>Processing Purchase...</span>
+                    </>
+                  ) : vehicle.status === 'SOLD' ? (
+                    <span>Out of Stock</span>
+                  ) : !isAuthenticated ? (
+                    <span>Sign In to Purchase</span>
+                  ) : (
+                    <>
+                      <ShoppingBag size={18} />
+                      <span>Purchase Vehicle</span>
+                    </>
+                  )}
+                </button>
+              )}
               <button className="p-4 rounded-button bg-background hover:bg-border-light text-text-secondary hover:text-text border border-border transition-all">
                 <Share2 size={18} />
               </button>

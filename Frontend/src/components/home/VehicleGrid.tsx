@@ -17,6 +17,7 @@ interface VehicleGridProps {
   onPurchase?: (vehicle: Vehicle) => void;
   purchasingId?: string | number | null;
   isAuthenticated?: boolean;
+  isAdmin?: boolean;
   vehicles?: Vehicle[];
   isLoading?: boolean;
   isError?: boolean;
@@ -28,6 +29,7 @@ export default function VehicleGrid({
   onPurchase,
   purchasingId,
   isAuthenticated = false,
+  isAdmin = false,
   vehicles = [],
   isLoading = false,
   isError = false,
@@ -107,6 +109,7 @@ export default function VehicleGrid({
               onPurchase={onPurchase}
               isPurchasing={String(purchasingId) === String(vehicle.id)}
               isAuthenticated={isAuthenticated}
+              isAdmin={isAdmin}
               index={index}
             />
           ))}
