@@ -22,16 +22,33 @@ export const authenticate = (
             message: "Access token required",
         });
     }
-
+    // try {
+    //     jwt.verify(
+    //         token,
+    //         process.env.JWT_SECRET as string,
+    //     );
+    //     next();
+    // } catch {
+    //     return res.status(401).json({
+    //         message: "Invalid token",
+    //     });
+    // }
     try {
-        jwt.verify(
-            token,
-            process.env.JWT_SECRET as string,
-        );
-        next();
-    } catch {
-        return res.status(401).json({
-            message: "Invalid token",
-        });
-    }
+
+    const decoded = jwt.verify(
+        token,
+        process.env.JWT_SECRET as string,
+    );
+
+    req.user = decoded as NonNullable<Express.Request["user"]>;
+
+    next();
+
+} catch {
+
+    return res.status(401).json({
+        message: "Invalid token",
+    });
+
+}
 };

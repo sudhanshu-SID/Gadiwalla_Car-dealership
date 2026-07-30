@@ -59,10 +59,41 @@ describe("Authentication Middleware", () => {
         .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(200);
+    expect(response.body.message).toBe("Protected route accessed");
 
-    expect(response.body).toEqual({
-        message: "Protected route accessed",
-    });
+});
+
+    it("should attach decoded user information to the request", async () => {
+
+    const user = {
+        name: "Sid",
+        email: "sid@test.com",
+        password: "123456",
+    };
+
+    await request(app)
+        .post("/api/auth/register")
+        .send(user);
+
+    const loginResponse = await request(app)
+        .post("/api/auth/login")
+        .send({
+            email: user.email,
+            password: user.password,
+        });
+
+    const token = loginResponse.body.token;
+
+    const response = await request(app)
+        .get("/api/protected")
+        .set("Authorization", `Bearer ${token}`);
+
+    expect(response.status).toBe(200);
+
+    expect(response.body.user).toBeDefined();
+    expect(response.body.user.id).toBeDefined();
+    expect(response.body.user.email).toBe(user.email);
+    expect(response.body.user.role).toBe("CUSTOMER");
 
 });
 
