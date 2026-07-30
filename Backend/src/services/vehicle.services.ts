@@ -1,0 +1,23 @@
+import { createVehicle as createVehicleRepository } from "../repositories/vehicle.repository";
+import { getAllVehicles as getAllVehiclesRepository } from "../repositories/vehicle.repository";
+
+export interface CreateVehicleData {
+    make: string;
+    model: string;
+    year: number;
+    category: string;
+    price: number;
+    quantity: number;
+}
+
+export const createVehicle = async (
+    vehicleData: CreateVehicleData
+) => {
+
+    return await createVehicleRepository(vehicleData);
+
+};
+
+export const getAllVehicles = async () => {
+    return await getAllVehiclesRepository();
+};
