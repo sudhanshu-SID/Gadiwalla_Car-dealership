@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Hero from '../components/home/Hero';
 import StatsSection from '../components/home/StatsSection';
+import AboutSection from '../components/home/AboutSection';
 import VehicleGrid from '../components/home/VehicleGrid';
 import VehicleDetailsDrawer from '../components/home/VehicleDetailsDrawer';
 import AdminFAB from '../components/home/AdminFAB';
@@ -14,7 +15,7 @@ import { isAdmin } from '../utils/permissions';
 import { toast } from 'sonner';
 
 export default function Home() {
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const isAdminUser = isAdmin(user);
 
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -27,6 +28,7 @@ export default function Home() {
   const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null);
   const [deletingVehicle, setDeletingVehicle] = useState<Vehicle | null>(null);
   const [isActionLoading, setIsActionLoading] = useState<boolean>(false);
+  const [purchasingId, setPurchasingId] = useState<string | number | null>(null);
 
   // Fetch vehicles from API
   const fetchVehicles = useCallback(async () => {
@@ -163,6 +165,47 @@ export default function Home() {
     }
   };
 
+  const handlePurchaseVehicle = async (vehicle: Vehicle) => {
+    if (vehicle.status === 'SOLD') {
+      toast.error('Vehicle is out of stock.');
+      return;
+    }
+
+    setPurchasingId(vehicle.id);
+    try {
+      await vehicleService.purchaseVehicle(vehicle.id);
+      toast.success('Vehicle purchased successfully.');
+      await fetchVehicles();
+    } catch (error: unknown) {
+      console.error('Failed to purchase vehicle:', error);
+      let msg = 'Failed to purchase vehicle. Please try again.';
+      if (axios.isAxiosError(error) && error.response?.data?.message) {
+        msg = error.response.data.message;
+      } else if (error instanceof Error) {
+        msg = error.message;
+      }
+      toast.error(msg);
+    } finally {
+      setPurchasingId(null);
+    }
+  };
+
+  const handleRestockVehicle = async (vehicle: Vehicle) => {
+    try {
+      await vehicleService.restockVehicle(vehicle.id, 1);
+      toast.success(`Restocked ${vehicle.brand} ${vehicle.model} (+1 unit)`);
+      await fetchVehicles();
+      if (selectedVehicle && selectedVehicle.id === vehicle.id) {
+        setSelectedVehicle((prev) =>
+          prev ? { ...prev, quantity: (prev.quantity || 0) + 1, status: 'AVAILABLE' } : null
+        );
+      }
+    } catch (error: unknown) {
+      console.error('Failed to restock vehicle:', error);
+      toast.error('Failed to restock vehicle.');
+    }
+  };
+
   return (
     <main className="w-full min-h-screen bg-background pb-20">
       {/* 1. Hero Section */}
@@ -183,14 +226,24 @@ export default function Home() {
         isError={isError}
         onRetry={fetchVehicles}
         onViewDetails={handleViewDetails}
+        onPurchase={handlePurchaseVehicle}
+        purchasingId={purchasingId}
+        isAuthenticated={isAuthenticated}
       />
 
-      {/* 4. Slide-in Details Drawer */}
+      {/* 4. About Us Section */}
+      <AboutSection />
+
+      {/* 5. Slide-in Details Drawer */}
       <VehicleDetailsDrawer
         vehicle={selectedVehicle}
         isOpen={isDrawerOpen}
         onClose={handleCloseDrawer}
         isAdmin={isAdminUser}
+        isAuthenticated={isAuthenticated}
+        isPurchasing={selectedVehicle ? String(purchasingId) === String(selectedVehicle.id) : false}
+        onPurchase={handlePurchaseVehicle}
+        onRestock={handleRestockVehicle}
         onEdit={handleOpenEditModal}
         onDelete={handleOpenDeleteDialog}
       />

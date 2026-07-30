@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Calendar, Gauge, Share2, Edit2, Trash2 } from 'lucide-react';
+import { Plus, ShoppingBag, Loader2, X, Calendar, Gauge, Share2, Edit2, Trash2 } from 'lucide-react';
 import type { Vehicle } from './VehicleCard';
 
 interface VehicleDrawerProps {
@@ -7,6 +7,10 @@ interface VehicleDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   isAdmin?: boolean;
+  isAuthenticated?: boolean;
+  isPurchasing?: boolean;
+  onPurchase?: (vehicle: Vehicle) => void;
+  onRestock?: (vehicle: Vehicle) => void;
   onEdit?: (vehicle: Vehicle) => void;
   onDelete?: (vehicle: Vehicle) => void;
 }
@@ -15,7 +19,11 @@ export default function VehicleDetailsDrawer({
   vehicle,
   isOpen,
   onClose,
-  isAdmin = true, // default true for boilerplate demo
+  isAdmin = false,
+  isAuthenticated = false,
+  isPurchasing = false,
+  onPurchase,
+  onRestock,
   onEdit,
   onDelete,
 }: VehicleDrawerProps) {
@@ -115,38 +123,59 @@ export default function VehicleDetailsDrawer({
                   Specifications
                 </h4>
                 <div className="grid grid-cols-2 gap-3">
-                  {vehicle.specs?.map((spec, idx) => (
-                    <div
-                      key={idx}
-                      className="p-3.5 bg-background rounded-button border border-border-light flex flex-col gap-0.5"
-                    >
-                      <span className="text-caption text-text-muted uppercase font-semibold">
-                        {spec.label}
-                      </span>
-                      <span className="text-body-sm font-bold text-text">
-                        {spec.value}
-                      </span>
-                    </div>
-                  )) || (
-                    <>
-                      <div className="p-3.5 bg-background rounded-button border border-border-light flex flex-col gap-0.5">
-                        <span className="text-caption text-text-muted uppercase font-semibold">
-                          Fuel Type
-                        </span>
-                        <span className="text-body-sm font-bold text-text">
-                          {vehicle.fuelType || 'Electric'}
-                        </span>
-                      </div>
-                      <div className="p-3.5 bg-background rounded-button border border-border-light flex flex-col gap-0.5">
-                        <span className="text-caption text-text-muted uppercase font-semibold">
-                          Transmission
-                        </span>
-                        <span className="text-body-sm font-bold text-text">
-                          {vehicle.transmission || 'Automatic'}
-                        </span>
-                      </div>
-                    </>
-                  )}
+                  <div className="p-3.5 bg-background rounded-button border border-border-light flex flex-col gap-0.5">
+                    <span className="text-caption text-text-muted uppercase font-semibold">
+                      Make
+                    </span>
+                    <span className="text-body-sm font-bold text-text">
+                      {vehicle.brand}
+                    </span>
+                  </div>
+
+                  <div className="p-3.5 bg-background rounded-button border border-border-light flex flex-col gap-0.5">
+                    <span className="text-caption text-text-muted uppercase font-semibold">
+                      Model
+                    </span>
+                    <span className="text-body-sm font-bold text-text">
+                      {vehicle.model}
+                    </span>
+                  </div>
+
+                  <div className="p-3.5 bg-background rounded-button border border-border-light flex flex-col gap-0.5">
+                    <span className="text-caption text-text-muted uppercase font-semibold">
+                      Year
+                    </span>
+                    <span className="text-body-sm font-bold text-text">
+                      {vehicle.year}
+                    </span>
+                  </div>
+
+                  <div className="p-3.5 bg-background rounded-button border border-border-light flex flex-col gap-0.5">
+                    <span className="text-caption text-text-muted uppercase font-semibold">
+                      Category
+                    </span>
+                    <span className="text-body-sm font-bold text-text">
+                      {vehicle.category}
+                    </span>
+                  </div>
+
+                  <div className="p-3.5 bg-background rounded-button border border-border-light flex flex-col gap-0.5">
+                    <span className="text-caption text-text-muted uppercase font-semibold">
+                      Price
+                    </span>
+                    <span className="text-body-sm font-bold text-text">
+                      ${vehicle.price.toLocaleString()}
+                    </span>
+                  </div>
+
+                  <div className="p-3.5 bg-background rounded-button border border-border-light flex flex-col gap-0.5">
+                    <span className="text-caption text-text-muted uppercase font-semibold">
+                      Stock Quantity
+                    </span>
+                    <span className="text-body-sm font-bold text-primary">
+                      {vehicle.quantity ?? 1} {(vehicle.quantity ?? 1) === 1 ? 'unit' : 'units'}
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -156,17 +185,24 @@ export default function VehicleDetailsDrawer({
                   <span className="text-caption text-text-muted font-bold uppercase tracking-wider block">
                     Admin Inventory Controls
                   </span>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => onRestock?.(vehicle)}
+                      className="py-2.5 px-3 rounded-button bg-emerald-600 hover:bg-emerald-700 text-white text-body-sm font-semibold flex items-center justify-center gap-1.5 transition-all shadow-sm"
+                    >
+                      <Plus size={15} />
+                      <span>Restock (+1)</span>
+                    </button>
                     <button
                       onClick={() => onEdit?.(vehicle)}
-                      className="flex-1 py-2.5 px-4 rounded-button bg-secondary hover:bg-text text-white text-body-sm font-semibold flex items-center justify-center gap-2 transition-all shadow-sm"
+                      className="flex-1 py-2.5 px-3 rounded-button bg-secondary hover:bg-text text-white text-body-sm font-semibold flex items-center justify-center gap-1.5 transition-all shadow-sm"
                     >
                       <Edit2 size={15} />
-                      <span>Edit Vehicle</span>
+                      <span>Edit</span>
                     </button>
                     <button
                       onClick={() => onDelete?.(vehicle)}
-                      className="py-2.5 px-4 rounded-button bg-error/10 hover:bg-error text-error hover:text-white text-body-sm font-semibold flex items-center justify-center gap-2 transition-all"
+                      className="py-2.5 px-3 rounded-button bg-error/10 hover:bg-error text-error hover:text-white text-body-sm font-semibold flex items-center justify-center gap-1.5 transition-all"
                     >
                       <Trash2 size={15} />
                       <span>Delete</span>
@@ -178,8 +214,36 @@ export default function VehicleDetailsDrawer({
 
             {/* Sticky Action Footer */}
             <div className="p-6 border-t border-border bg-surface flex items-center gap-4">
-              <button className="flex-1 py-4 rounded-button bg-primary hover:bg-primary-hover text-white text-label font-semibold tracking-wider uppercase transition-all shadow-fab hover:shadow-fab-hover active:scale-98">
-                Vehicle Details
+              <button
+                onClick={() => {
+                  if (onPurchase && vehicle.status !== 'SOLD' && !isPurchasing) {
+                    onPurchase(vehicle);
+                  }
+                }}
+                disabled={vehicle.status === 'SOLD' || isPurchasing || !isAuthenticated}
+                className={`flex-1 py-4 rounded-button font-semibold tracking-wider uppercase transition-all shadow-fab hover:shadow-fab-hover flex items-center justify-center gap-2 text-label ${
+                  vehicle.status === 'SOLD'
+                    ? 'bg-secondary/40 text-text-muted cursor-not-allowed border border-border'
+                    : isPurchasing
+                    ? 'bg-primary/80 text-white cursor-wait opacity-80'
+                    : 'bg-primary hover:bg-primary-hover text-white active:scale-98'
+                }`}
+              >
+                {isPurchasing ? (
+                  <>
+                    <Loader2 size={18} className="animate-spin" />
+                    <span>Processing Purchase...</span>
+                  </>
+                ) : vehicle.status === 'SOLD' ? (
+                  <span>Out of Stock</span>
+                ) : !isAuthenticated ? (
+                  <span>Sign In to Purchase</span>
+                ) : (
+                  <>
+                    <ShoppingBag size={18} />
+                    <span>Purchase Vehicle</span>
+                  </>
+                )}
               </button>
               <button className="p-4 rounded-button bg-background hover:bg-border-light text-text-secondary hover:text-text border border-border transition-all">
                 <Share2 size={18} />

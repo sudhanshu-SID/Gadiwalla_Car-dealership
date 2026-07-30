@@ -14,6 +14,9 @@ const CATEGORIES = ['ALL', 'Electric', 'Sedan', 'SUV', 'Coupe', 'Hybrid'];
 
 interface VehicleGridProps {
   onViewDetails: (vehicle: Vehicle) => void;
+  onPurchase?: (vehicle: Vehicle) => void;
+  purchasingId?: string | number | null;
+  isAuthenticated?: boolean;
   vehicles?: Vehicle[];
   isLoading?: boolean;
   isError?: boolean;
@@ -22,6 +25,9 @@ interface VehicleGridProps {
 
 export default function VehicleGrid({
   onViewDetails,
+  onPurchase,
+  purchasingId,
+  isAuthenticated = false,
   vehicles = [],
   isLoading = false,
   isError = false,
@@ -98,6 +104,9 @@ export default function VehicleGrid({
               key={vehicle.id}
               vehicle={vehicle}
               onViewDetails={onViewDetails}
+              onPurchase={onPurchase}
+              isPurchasing={String(purchasingId) === String(vehicle.id)}
+              isAuthenticated={isAuthenticated}
               index={index}
             />
           ))}

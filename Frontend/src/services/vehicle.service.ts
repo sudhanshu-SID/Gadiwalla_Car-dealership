@@ -46,6 +46,30 @@ export function mapBackendToFrontend(bv: BackendVehicle): Vehicle {
   const status: 'AVAILABLE' | 'RESERVED' | 'SOLD' =
     bv.status || (qty > 0 ? 'AVAILABLE' : 'SOLD');
 
+  const getVehicleImage = (makeStr: string, modelStr: string, fallbackImage?: string) => {
+    if (fallbackImage && fallbackImage.startsWith('http')) return fallbackImage;
+    const key = `${makeStr} ${modelStr}`.toLowerCase();
+    if (key.includes('tesla')) {
+      return 'https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=1200&auto=format&fit=crop';
+    }
+    if (key.includes('porsche') || key.includes('taycan')) {
+      return 'https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=1200&auto=format&fit=crop';
+    }
+    if (key.includes('mercedes') || key.includes('amg')) {
+      return 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=1200&auto=format&fit=crop';
+    }
+    if (key.includes('toyota') || key.includes('land cruiser')) {
+      return 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=1200&auto=format&fit=crop';
+    }
+    if (key.includes('audi')) {
+      return 'https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=1200&auto=format&fit=crop';
+    }
+    if (key.includes('bmw')) {
+      return 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=1200&auto=format&fit=crop';
+    }
+    return 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop';
+  };
+
   return {
     id: String(bv.id),
     brand: brandName,
@@ -53,19 +77,20 @@ export function mapBackendToFrontend(bv: BackendVehicle): Vehicle {
     year: Number(bv.year) || new Date().getFullYear(),
     category: bv.category || 'Electric',
     price: Number(bv.price) || 0,
+    quantity: qty,
     mileage: typeof bv.mileage === 'number' ? bv.mileage : 1200,
-    image:
-      bv.image ||
-      'https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=1200&auto=format&fit=crop',
+    image: getVehicleImage(brandName, bv.model || '', bv.image),
     status,
     fuelType: bv.fuelType || 'Electric',
     transmission: bv.transmission || 'Automatic',
     description: bv.description || `${brandName} ${bv.model} featuring advanced performance and luxury features.`,
-    specs: bv.specs || [
-      { label: '0-60 MPH', value: '3.2s' },
-      { label: 'RANGE', value: '310 mi' },
-      { label: 'TOP SPEED', value: '155 mph' },
-      { label: 'STATUS', value: status },
+    specs: [
+      { label: 'MAKE', value: brandName },
+      { label: 'MODEL', value: bv.model || 'Model' },
+      { label: 'YEAR', value: String(bv.year || new Date().getFullYear()) },
+      { label: 'CATEGORY', value: bv.category || 'Electric' },
+      { label: 'PRICE', value: `$${Number(bv.price || 0).toLocaleString()}` },
+      { label: 'STOCK QUANTITY', value: `${qty} ${qty === 1 ? 'unit' : 'units'}` },
     ],
   };
 }
@@ -111,7 +136,6 @@ export const vehicleService = {
   async createVehicle(payload: CreateVehiclePayload): Promise<Vehicle> {
     const backendData = mapFrontendToBackend(payload);
     const response = await api.post<BackendVehicle>('/vehicles', backendData);
-    // Merge full input payload (image, description, etc.) with backend response
     const created = mapBackendToFrontend({ ...payload, ...response.data });
     return created;
   },
@@ -124,6 +148,22 @@ export const vehicleService = {
     const response = await api.put<BackendVehicle>(`/vehicles/${id}`, backendData);
     const updated = mapBackendToFrontend({ ...payload, ...response.data });
     return updated;
+  },
+
+  /**
+   * PATCH /api/vehicles/:id/purchase - Purchase a vehicle (Authenticated Users)
+   */
+  async purchaseVehicle(id: string | number): Promise<Vehicle> {
+    const response = await api.patch<BackendVehicle>(`/vehicles/${id}/purchase`);
+    return mapBackendToFrontend(response.data);
+  },
+
+  /**
+   * POST /api/vehicles/:id/restock - Restock vehicle stock (Admin Only)
+   */
+  async restockVehicle(id: string | number, amount: number = 1): Promise<Vehicle> {
+    const response = await api.post<BackendVehicle>(`/vehicles/${id}/restock`, { amount });
+    return mapBackendToFrontend(response.data);
   },
 
   /**

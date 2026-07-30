@@ -12,6 +12,7 @@ const vehicleSchema = z.object({
   year: z.coerce.number().min(1900, 'Invalid year').max(2030, 'Invalid year'),
   category: z.string().min(1, 'Category is required'),
   price: z.coerce.number().min(1, 'Price must be greater than 0'),
+  quantity: z.coerce.number().min(0, 'Quantity cannot be negative'),
   mileage: z.coerce.number().min(0, 'Mileage cannot be negative'),
   image: z.string().url('Must be a valid URL'),
   status: z.enum(['AVAILABLE', 'RESERVED', 'SOLD']),
@@ -52,6 +53,7 @@ export default function AddVehicleModal({
       year: new Date().getFullYear(),
       category: 'Electric',
       price: 50000,
+      quantity: 5,
       mileage: 0,
       image: '',
       status: 'AVAILABLE',
@@ -69,6 +71,7 @@ export default function AddVehicleModal({
         year: initialData.year,
         category: initialData.category,
         price: initialData.price,
+        quantity: initialData.quantity ?? 5,
         mileage: initialData.mileage,
         image: initialData.image,
         status: initialData.status,
@@ -83,6 +86,7 @@ export default function AddVehicleModal({
         year: new Date().getFullYear(),
         category: 'Electric',
         price: 50000,
+        quantity: 5,
         mileage: 0,
         image: '',
         status: 'AVAILABLE',
@@ -100,23 +104,23 @@ export default function AddVehicleModal({
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 cursor-pointer"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"
           />
 
           {/* Modal Card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl max-h-[90vh] bg-surface z-50 rounded-card shadow-modal border border-border overflow-hidden flex flex-col"
+            className="relative w-full max-w-2xl my-auto max-h-[85vh] bg-surface z-10 rounded-card shadow-2xl border border-border overflow-hidden flex flex-col"
           >
             {/* Header */}
             <div className="p-6 border-b border-border flex items-center justify-between bg-surface sticky top-0 z-10">
@@ -242,8 +246,8 @@ export default function AddVehicleModal({
                 </div>
               </div>
 
-              {/* Price & Mileage */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Price, Stock Quantity & Mileage */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-label text-text font-semibold uppercase">
                     Price ($ USD)
@@ -256,6 +260,21 @@ export default function AddVehicleModal({
                   />
                   {errors.price && (
                     <span className="text-caption text-error">{errors.price.message}</span>
+                  )}
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-label text-text font-semibold uppercase">
+                    Stock Quantity
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="e.g. 5"
+                    {...register('quantity')}
+                    className="w-full px-4 py-3 rounded-input bg-background border border-border text-text text-body-sm outline-none focus:border-primary transition-colors"
+                  />
+                  {errors.quantity && (
+                    <span className="text-caption text-error">{errors.quantity.message}</span>
                   )}
                 </div>
 
@@ -340,7 +359,7 @@ export default function AddVehicleModal({
               </div>
             </form>
           </motion.div>
-        </>
+        </div>
       )}
     </AnimatePresence>
   );

@@ -13,6 +13,7 @@ vi.mock('./api', () => ({
     get: vi.fn(),
     post: vi.fn(),
     put: vi.fn(),
+    patch: vi.fn(),
     delete: vi.fn(),
   },
 }));
@@ -232,6 +233,26 @@ describe('Vehicle Service & Mapping Utilities', () => {
       });
 
       expect(result.model).toBe('AMG GT Black Series');
+    });
+
+    it('purchaseVehicle() calls PATCH /vehicles/:id/purchase and returns updated mapped vehicle', async () => {
+      const mockResponse = {
+        id: 99,
+        make: 'Mercedes-Benz',
+        model: 'AMG GT',
+        year: 2024,
+        category: 'Coupe',
+        price: 175000,
+        quantity: 4,
+      };
+
+      vi.mocked(api.patch).mockResolvedValueOnce({ data: mockResponse });
+
+      const result = await vehicleService.purchaseVehicle(99);
+
+      expect(api.patch).toHaveBeenCalledWith('/vehicles/99/purchase');
+      expect(result.id).toBe('99');
+      expect(result.status).toBe('AVAILABLE');
     });
 
     it('deleteVehicle() calls DELETE /vehicles/:id and resolves successfully', async () => {

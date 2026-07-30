@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ChevronRight, Gauge, Calendar } from 'lucide-react';
+import { ChevronRight, Gauge, Calendar, ShoppingBag, Loader2 } from 'lucide-react';
 
 export interface Vehicle {
   id: string;
@@ -8,6 +8,7 @@ export interface Vehicle {
   year: number;
   category: string;
   price: number;
+  quantity?: number;
   mileage: number;
   image: string;
   status: 'AVAILABLE' | 'RESERVED' | 'SOLD';
@@ -20,14 +21,22 @@ export interface Vehicle {
 interface VehicleCardProps {
   vehicle: Vehicle;
   onViewDetails: (vehicle: Vehicle) => void;
+  onPurchase?: (vehicle: Vehicle) => void;
+  isPurchasing?: boolean;
+  isAuthenticated?: boolean;
   index?: number;
 }
 
 export default function VehicleCard({
   vehicle,
   onViewDetails,
+  onPurchase,
+  isPurchasing = false,
+  isAuthenticated = false,
   index = 0,
 }: VehicleCardProps) {
+  const isSold = vehicle.status === 'SOLD';
+
   const getStatusColor = (status: Vehicle['status']) => {
     switch (status) {
       case 'AVAILABLE':
@@ -108,20 +117,51 @@ export default function VehicleCard({
       </div>
 
       {/* Action Footer */}
-      <div className="pt-1 px-1 flex items-center justify-between">
-        <span className="text-caption text-text-muted uppercase tracking-wider font-medium">
-          Stock ID: {vehicle.id}
-        </span>
+      <div className="pt-2 px-1 flex items-center justify-between gap-2 border-t border-border/50">
         <button
           onClick={(e) => {
             e.stopPropagation();
             onViewDetails(vehicle);
           }}
-          className="inline-flex items-center gap-1.5 text-label text-primary font-semibold group-hover:translate-x-1 transition-transform duration-200"
+          className="inline-flex items-center gap-1 text-label text-text-muted hover:text-primary font-semibold transition-colors duration-200"
         >
-          <span>View Details</span>
-          <ChevronRight size={16} />
+          <span>Details</span>
+          <ChevronRight size={15} />
         </button>
+
+        {/* Purchase Button (Visible for Authenticated Users) */}
+        {isAuthenticated && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              if (onPurchase && !isSold && !isPurchasing) {
+                onPurchase(vehicle);
+              }
+            }}
+            disabled={isSold || isPurchasing}
+            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
+              isSold
+                ? 'bg-secondary/40 text-text-muted cursor-not-allowed border border-border'
+                : isPurchasing
+                ? 'bg-primary/80 text-white cursor-wait opacity-80'
+                : 'bg-primary hover:bg-primary-container text-white shadow-md hover:scale-105 active:scale-95'
+            }`}
+          >
+            {isPurchasing ? (
+              <>
+                <Loader2 size={13} className="animate-spin" />
+                <span>Buying...</span>
+              </>
+            ) : isSold ? (
+              <span>Out of Stock</span>
+            ) : (
+              <>
+                <ShoppingBag size={13} />
+                <span>Purchase</span>
+              </>
+            )}
+          </button>
+        )}
       </div>
     </motion.div>
   );
